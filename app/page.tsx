@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Button from '../components/Button';
 
 interface Product {
   id: string;
@@ -55,9 +56,11 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Welcome to Kibo Sandbox</h1>
           <p className="text-xl mb-8">A developer learning environment for Next.js, React, and Kibo Commerce</p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
-            Get Started
-          </button>
+          <Button text="Get Started" backgroundColor="#E00034" borderRadius="0px" />
+          <div className="mt-4">
+            <Button text="Primary" className="mr-4" />
+            <Button text="Custom" backgroundColor="#10B981" borderRadius="40px" />
+          </div>
         </div>
       </section>
 
@@ -108,9 +111,7 @@ export default function Home() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">Ready to Start Building?</h2>
           <p className="text-gray-600 mb-8">Explore the components and start experimenting with your own features</p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700">
-            View Components
-          </button>
+          <Button text="View Components" />
         </div>
       </section>
 
