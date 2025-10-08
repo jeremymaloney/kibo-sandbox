@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1052-63020",
+    "productCode": "1052-63020",
+    "name": "Morrison Medical Isolation Kit Without Eye Shield",
+    "description": "Complete isolation kit for personal protection",
+    "price": 62.99,
+    "salePrice": 62.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Isolation+Kit",
+    "category": "Personal Protection Equipment",
+    "inStock": true
+  },
+  {
+    "id": "298576",
+    "productCode": "298576",
+    "name": "Tidishield Disposable Personal Protection Gown, Light Blue, Universal",
+    "description": "Disposable protection gown, universal size, light blue",
+    "price": 24.99,
+    "salePrice": 24.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Protection+Gown",
+    "category": "Personal Protection Equipment",
+    "inStock": true
+  },
+  {
+    "id": "3421-89",
+    "productCode": "3421-89",
+    "name": "N95 Respirator Mask Box of 20",
+    "description": "NIOSH approved N95 respirator masks, 20 count",
+    "price": 45.99,
+    "salePrice": 39.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=N95+Masks",
+    "category": "Respiratory Protection",
+    "inStock": true
+  },
+  {
+    "id": "7823-45",
+    "productCode": "7823-45",
+    "name": "Nitrile Examination Gloves, Medium, Box of 100",
+    "description": "Powder-free nitrile examination gloves, medium size",
+    "price": 18.99,
+    "salePrice": 18.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Nitrile+Gloves",
+    "category": "Hand Protection",
+    "inStock": true
+  },
+  {
+    "id": "5534-22",
+    "productCode": "5534-22",
+    "name": "Face Shield with Adjustable Headband",
+    "description": "Clear face shield with comfortable adjustable headband",
+    "price": 12.99,
+    "salePrice": 9.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Face+Shield",
+    "category": "Face Protection",
+    "inStock": true
+  },
+  {
+    "id": "9876-11",
+    "productCode": "9876-11",
+    "name": "Surgical Mask Level 3, Box of 50",
+    "description": "ASTM Level 3 surgical masks with ear loops",
+    "price": 29.99,
+    "salePrice": 29.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Surgical+Masks",
+    "category": "Face Protection",
+    "inStock": false
+  },
+  {
+    "id": "4421-78",
+    "productCode": "4421-78",
+    "name": "Isolation Gown with Elastic Cuffs, Yellow, Large",
+    "description": "Disposable isolation gown with elastic cuffs, size large",
+    "price": 8.99,
+    "salePrice": 8.99,
+    "imageUrl": "https://placehold.co/400x400/fff9c4/f57f17?text=Yellow+Gown",
+    "category": "Personal Protection Equipment",
+    "inStock": true
+  },
+  {
+    "id": "6654-33",
+    "productCode": "6654-33",
+    "name": "Safety Goggles Anti-Fog",
+    "description": "Anti-fog safety goggles with adjustable strap",
+    "price": 15.99,
+    "salePrice": 12.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Safety+Goggles",
+    "category": "Eye Protection",
+    "inStock": true
+  },
+  {
+    "id": "2234-56",
+    "productCode": "2234-56",
+    "name": "Shoe Covers Disposable, Blue, Universal",
+    "description": "Disposable non-skid shoe covers, universal size",
+    "price": 14.99,
+    "salePrice": 14.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Shoe+Covers",
+    "category": "Personal Protection Equipment",
+    "inStock": true
+  },
+  {
+    "id": "8877-99",
+    "productCode": "8877-99",
+    "name": "Hand Sanitizer Gel 16oz Pump Bottle",
+    "description": "70% alcohol hand sanitizer gel with pump dispenser",
+    "price": 9.99,
+    "salePrice": 7.99,
+    "imageUrl": "https://placehold.co/400x400/e8f5e9/2e7d32?text=Hand+Sanitizer",
+    "category": "Sanitization",
+    "inStock": true
+  },
+  {
+    "id": "3345-67",
+    "productCode": "3345-67",
+    "name": "Bouffant Caps Disposable, White, 100 Pack",
+    "description": "Disposable bouffant caps for hair protection",
+    "price": 12.99,
+    "salePrice": 12.99,
+    "imageUrl": "https://placehold.co/400x400/e3f2fd/1565c0?text=Bouffant+Caps",
+    "category": "Head Protection",
+    "inStock": true
+  },
+  {
+    "id": "7788-44",
+    "productCode": "7788-44",
+    "name": "Disinfecting Wipes Canister 160 Count",
+    "description": "Hospital-grade disinfecting wipes, 160 count canister",
+    "price": 11.99,
+    "salePrice": 11.99,
+    "imageUrl": "https://placehold.co/400x400/e8f5e9/2e7d32?text=Disinfecting+Wipes",
+    "category": "Sanitization",
+    "inStock": true
+  }
+]

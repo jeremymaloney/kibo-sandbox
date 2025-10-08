@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kibo Sandbox - Developer Learning Environment
+
+A Next.js sandbox environment for developers to learn and experiment with React, Next.js, and Kibo Commerce APIs.
+
+## Tech Stack
+
+- **Next.js 15** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS**
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ installed
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/jeremymaloney/kibo-sandbox.git
+cd kibo-sandbox
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+kibo-sandbox/
+├── app/
+│   └── page.tsx              # Main products page
+├── components/
+│   ├── Button.tsx            # Minimal button component
+│   ├── Link.tsx              # Minimal link component
+│   ├── Input.tsx             # Minimal input component
+│   ├── Form.tsx              # Minimal form wrapper
+│   └── ProductCard.tsx       # Minimal product display
+├── data/
+│   └── products.json         # Mock product data
+└── README.md
+```
 
-## Learn More
+## Components Philosophy
 
-To learn more about Next.js, take a look at the following resources:
+All components start with **minimal props** intentionally. This allows developers to:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Learn by adding features incrementally
+- Practice prop management
+- Understand component composition
+- Make PRs to enhance components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Each component file includes TODO comments suggesting features to add.
 
-## Deploy on Vercel
+## Current State
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ✅ Working Now
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Mock product data (based on Sarnova medical supplies catalog)
+- Basic product listing page
+- Minimal components ready for enhancement
+
+### 🔜 Next Steps (Waiting on API Credentials)
+
+- Connect to real Kibo API
+- Fetch live product data
+- Add authentication
+
+## Connecting to Real Kibo API
+
+Once you have Kibo API credentials:
+
+1. Create a `.env.local` file in the root directory:
+
+```env
+KIBO_CLIENT_ID=your_client_id
+KIBO_CLIENT_SECRET=your_client_secret
+KIBO_TENANT_ID=1000346
+KIBO_API_BASE_URL=https://t1000346.sb.usc1.gcp.kibocommerce.com/api
+```
+
+2. Create `lib/kibo.ts` for API integration:
+
+```typescript
+// Example Kibo API client
+export async function getProducts() {
+  const response = await fetch(`${process.env.KIBO_API_BASE_URL}/commerce/catalog/storefront/products`, {
+    headers: {
+      'x-vol-app-claims': // Add authentication
+    }
+  });
+  return response.json();
+}
+```
+
+3. Update `app/page.tsx` to fetch from API instead of mock data
+
+## Contributing
+
+This is a learning sandbox! Feel free to:
+
+- Add new components
+- Enhance existing components
+- Add new features
+- Experiment with different approaches
+
+### Suggested First PRs
+
+1. Add onClick to Button component
+2. Add image display to ProductCard
+3. Add className props for custom styling
+4. Add form validation to Form component
+5. Add "Add to Cart" functionality
+
+## Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [Kibo Commerce API Docs](https://docs.kibocommerce.com)
+
+## Questions?
+
+Reach out to your team lead or check the Kibo training materials for more information about the platform.
+
+---
+
+**Happy coding! 🚀**
