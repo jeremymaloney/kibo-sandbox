@@ -1,4 +1,40 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+
+interface Product {
+  id: string;
+  productCode: string;
+  name: string;
+  description: string;
+  price: number;
+  salePrice: number;
+  imageUrl: string;
+  category: string;
+  inStock: boolean;
+}
+
 export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fake API call to get products
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products');
+        const data = await response.json();
+        setProducts(data.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header/Navigation */}
@@ -28,7 +64,7 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">What You&apos;ll Learn</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">What You'll Learn</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6">
               <div className="text-4xl mb-4">⚛️</div>
@@ -46,6 +82,24 @@ export default function Home() {
               <p className="text-gray-600">Integrate with Kibo APIs to build e-commerce experiences</p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Products Display Section - Using State from API */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Product Catalog ({loading ? '...' : products.length} items)
+          </h2>
+          
+          {loading ? (
+            <div className="text-center text-gray-600">Loading products...</div>
+          ) : (
+            <div className="text-center text-gray-600">
+              <p className="mb-4">Products loaded successfully!</p>
+              <p className="text-sm">State variable contains {products.length} products that can be passed as props to components.</p>
+            </div>
+          )}
         </div>
       </section>
 
