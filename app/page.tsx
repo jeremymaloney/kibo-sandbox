@@ -60,6 +60,11 @@ export default function Home() {
           <div className="mt-4">
             <Button text="Primary" className="mr-4" />
             <Button text="Custom" backgroundColor="#10B981" borderRadius="40px" />
+            {/* Button with onClick handler */}
+            <Button 
+              text="Click Me" 
+              onClick={() => console.log('Button clicked!')}
+            />
           </div>
         </div>
       </section>

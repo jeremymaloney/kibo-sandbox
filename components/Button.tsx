@@ -1,4 +1,3 @@
-// TODO: Add onClick handler
 // TODO: Add disabled state
 // TODO: Add loading state
 // TODO: Add button variants (primary, secondary, etc.)
@@ -8,6 +7,7 @@ interface ButtonProps {
   backgroundColor?: string;
   borderRadius?: string;
   className?: string;
+  onClick?: () => void;
 }
 
 export default function Button({
@@ -15,6 +15,7 @@ export default function Button({
   backgroundColor = '#2563EB',
   borderRadius = '8px',
   className,
+  onClick,
 }: ButtonProps) {
 
   const style = {
@@ -28,7 +29,7 @@ export default function Button({
   };
 
   return (
-    <button type="button" style={style} className={className}>
+    <button type="button" style={style} className={className} onClick={onClick}>
       {text}
     </button>
   );
