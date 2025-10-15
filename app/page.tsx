@@ -93,8 +93,8 @@ export default function Home() {
             backgroundColor="#E00034"
             borderRadius="0px"
           />
-          <div className="mt-4">
-            <Button text="Primary" className="mr-4" />
+          <div className="mt-4 grid grid-cols-4 gap-4">
+            <Button text="Primary" />
             <Button
               text="Custom"
               backgroundColor="#10B981"
@@ -104,6 +104,7 @@ export default function Home() {
               text="Click Me"
               onClick={() => console.log("Button clicked!")}
             />
+            <Button text="Disabled" backgroundColor="gray" disabled={true} />
           </div>
         </div>
       </section>
