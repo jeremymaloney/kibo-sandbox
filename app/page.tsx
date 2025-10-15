@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
+import MarketingBannerV1 from "@/components/marketing-banner-v1";
 
 // Updated interface to match Kibo's actual product structure
 interface KiboProduct {
@@ -81,6 +82,13 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
+      <MarketingBannerV1
+        title="I'm a Marketing Banner!"
+        description="A reusable banner component made from Aries-UI"
+        badgeText="Super cool!"
+        imageUrl="vercel.svg"
+      />
+
       <section className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-5xl font-bold mb-4">Welcome to Kibo Sandbox</h1>
