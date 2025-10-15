@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Button from "../components/Button";
+import { Button } from "../components/ui/button";
 
 // Updated interface to match Kibo's actual product structure
 interface KiboProduct {
@@ -88,23 +88,12 @@ export default function Home() {
             A developer learning environment for Next.js, React, and Kibo
             Commerce
           </p>
-          <Button
-            text="Get Started"
-            backgroundColor="#E00034"
-            borderRadius="0px"
-          />
-          <div className="mt-4">
-            <Button text="Primary" className="mr-4" />
-            <Button
-              text="Custom"
-              backgroundColor="#10B981"
-              borderRadius="40px"
-            />
-            <Button
-              text="Click Me"
-              onClick={() => console.log("Button clicked!")}
-            />
-          </div>
+          <Button onClick={() => console.log("Button clicked!")}>
+            Click Me
+          </Button>
+          <Button variant={"secondary"} size={"lg"}>
+            Secondary Button
+          </Button>
         </div>
       </section>
 
@@ -219,7 +208,7 @@ export default function Home() {
             Explore the components and start experimenting with your own
             features
           </p>
-          <Button text="View Components" />
+          <Button>View Components</Button>
         </div>
       </section>
 
