@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import MarketingBannerV1 from "@/components/marketing-banner-v1";
+import Header from "../components/header"
+import Head from "next/head";
 
 // Updated interface to match Kibo's actual product structure
 interface KiboProduct {
@@ -53,33 +55,8 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header/Navigation */}
-      <header className="border-b">
-        <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold text-gray-800">Kibo Sandbox</div>
-          <ul className="flex gap-6">
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Products
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      
+      <Header />
 
       {/* Hero Section */}
       <MarketingBannerV1
