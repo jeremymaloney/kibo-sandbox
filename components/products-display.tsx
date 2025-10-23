@@ -1,26 +1,12 @@
-import { useState } from "react";
+import ProductCard from "./product-card";
 
 // Product structure
 interface Product {
   productCode: string;
-  productSequence?: number;
   productType?: string;
   productTypeId?: number;
-  productUsage?: string;
-  publishState?: string;
-  goodsType?: string;
   isActive?: boolean;
   isTaxable?: boolean;
-  isRecurring?: boolean;
-  isPackagedStandAlone?: boolean;
-  createDate?: string;
-  updateDate?: string;
-  dateFirstAvailableInCatalog?: string;
-  daysAvailableInCatalog?: number;
-  costPriceMargin?: number;
-  personalizationScore?: number;
-  score?: number;
-  slicingAttributeFQN?: string;
 
   content?: {
     productName?: string;
@@ -29,9 +15,6 @@ interface Product {
     productImages?: Array<{
       imageUrl?: string;
       altText?: string;
-      cmsId?: string;
-      sequence?: number;
-      productImageGroupId?: string;
     }>;
   };
 
@@ -39,11 +22,6 @@ interface Product {
     price?: number;
     salePrice?: number;
     catalogListPrice?: number;
-    effectivePricelistCode?: string;
-    priceListEntryCode?: string;
-    priceListEntryEndDate?: string;
-    priceListEntryMode?: string;
-    priceType?: string;
   };
 
   inventoryInfo?: {
@@ -54,33 +32,9 @@ interface Product {
     onlineLocationCode?: string;
   };
 
-  categories?: Array<{
-    categoryId: number;
-    categoryCode?: string;
-    sequence?: number;
-    parentCategory?: Record<string, unknown>;
-    content?: Record<string, unknown>;
-  }>;
-
-  measurements?: {
-    packageHeight?: Record<string, unknown>;
-    packageWidth?: Record<string, unknown>;
-    packageLength?: Record<string, unknown>;
-    packageWeight?: Record<string, unknown>;
-  };
-
-  pricingBehavior?: {
-    discountsRestricted?: boolean;
-  };
-
   purchasableState?: {
     isPurchasable?: boolean;
   };
-
-  fulfillmentTypesSupported?: string[];
-  productCollections?: unknown[];
-  productImageGroups?: unknown[];
-  properties?: Array<Record<string, unknown>>;
 }
 
 type ProductsDisplayProps = {
@@ -92,10 +46,31 @@ export default function ProductsDisplay({
   products,
   loading,
 }: ProductsDisplayProps) {
-  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+  const getAbsoluteImageUrl = (url?: string): string => {
+    if (!url) return "/placeholder-image.jpg";
+    if (url.startsWith("//")) return `https:${url}`;
+    return url;
+  };
 
-  const handleImageError = (productCode: string) => {
-    setImageErrors((prev) => new Set(prev).add(productCode));
+  const stripHtml = (html?: string): string => {
+    if (!html) return "";
+    // Remove HTML tags
+    let text = html.replace(/<[^>]*>/g, "");
+    // Decode common HTML entities
+    text = text
+      .replace(/&nbsp;/g, " ")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&ldquo;/g, '"')
+      .replace(/&rdquo;/g, '"')
+      .replace(/&lsquo;/g, "'")
+      .replace(/&rsquo;/g, "'");
+    // Clean up extra whitespace (multiple spaces, newlines, etc.)
+    text = text.replace(/\s+/g, " ").trim();
+    return text;
   };
 
   return (
@@ -112,55 +87,24 @@ export default function ProductsDisplay({
             <p>No products found in your Kibo catalog.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => {
-              const hasImage = product.content?.productImages?.[0]?.imageUrl;
-              const imageUrl = hasImage ? `https:${hasImage}` : null;
-              const showImage =
-                imageUrl && !imageErrors.has(product.productCode);
-
-              return (
-                <div
-                  key={product.productCode}
-                  className="bg-white rounded-lg shadow-md p-4"
-                >
-                  {/* Product Image or Placeholder */}
-                  {showImage ? (
-                    <img
-                      src={imageUrl}
-                      alt={product.content?.productName || "Product"}
-                      className="w-full h-48 object-cover rounded mb-4"
-                      onError={() => handleImageError(product.productCode)}
-                    />
-                  ) : (
-                    <div className="w-full h-48 bg-gray-300 rounded mb-4 flex items-center justify-center">
-                      <span className="text-gray-500 text-sm">No Image</span>
-                    </div>
-                  )}
-
-                  {/* Product Info */}
-                  <h3 className="font-semibold text-lg mb-2">
-                    {product.content?.productName || "Unnamed Product"}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-2">
-                    Code: {product.productCode}
-                  </p>
-                  {product.price?.price && (
-                    <p className="text-lg font-bold text-blue-600">
-                      ${product.price.salePrice || product.price.price}
-                    </p>
-                  )}
-                  {product.inventoryInfo?.onlineStockAvailable !==
-                    undefined && (
-                    <p className="text-sm text-gray-500 mt-2">
-                      {product.inventoryInfo.onlineStockAvailable > 0
-                        ? `In Stock: ${product.inventoryInfo.onlineStockAvailable}`
-                        : "Out of Stock"}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+          <div className="grid sm: grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <ProductCard
+                key={product.productCode}
+                id={product.productCode}
+                name={product.content?.productName}
+                description={stripHtml(
+                  product.content?.productShortDescription
+                )}
+                price={product.price?.price}
+                image={
+                  getAbsoluteImageUrl(
+                    product.content?.productImages?.[0]?.imageUrl
+                  ) || "No_image.svg"
+                }
+                inStock={product.purchasableState?.isPurchasable}
+              />
+            ))}
           </div>
         )}
       </div>
