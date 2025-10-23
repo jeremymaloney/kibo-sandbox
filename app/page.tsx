@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import MarketingBannerV1 from "@/components/marketing-banner-v1";
-import Header from "../components/header"
+import Header from "../components/header";
+import Footer from "../components/footer";
 import Head from "next/head";
 
 // Updated interface to match Kibo's actual product structure
@@ -55,7 +56,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header/Navigation */}
-      
+
       <Header />
 
       {/* Hero Section */}
@@ -169,12 +170,12 @@ export default function Home() {
                     )}
                     {product.inventoryInfo?.onlineStockAvailable !==
                       undefined && (
-                      <p className="text-sm text-gray-500 mt-2">
-                        {product.inventoryInfo.onlineStockAvailable > 0
-                          ? `In Stock: ${product.inventoryInfo.onlineStockAvailable}`
-                          : "Out of Stock"}
-                      </p>
-                    )}
+                        <p className="text-sm text-gray-500 mt-2">
+                          {product.inventoryInfo.onlineStockAvailable > 0
+                            ? `In Stock: ${product.inventoryInfo.onlineStockAvailable}`
+                            : "Out of Stock"}
+                        </p>
+                      )}
                   </div>
                 );
               })}
@@ -198,61 +199,38 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-8 mt-auto">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-6">
-            <div>
-              <h4 className="font-bold mb-3">Kibo Sandbox</h4>
-              <p className="text-gray-400 text-sm">
-                A learning environment for developers
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-3">Resources</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    Components
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    API Reference
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-3">Support</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    Contact Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
-                    GitHub
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
-            <p>© 2025 Kibo Sandbox. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer
+        sections={[
+          {
+            title: "Shop",
+            links: [
+              { title: "All Products", href: "/products" },
+              { title: "Electronics", href: "/categories/electronics" },
+              { title: "Accessories", href: "/categories/accessories" },
+              { title: "Sale", href: "/sale" },
+            ],
+          },
+          {
+            title: "Support",
+            links: [
+              { title: "Contact Us", href: "/contact" },
+              { title: "FAQ", href: "/faq" },
+              { title: "Shipping", href: "/shipping" },
+              { title: "Returns", href: "/returns" },
+            ],
+          }
+        ]}
+        socialLinks={[
+          { name: "Twitter", href: "https://twitter.com/", icon: () => <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter" className="w-5 h-5" /> },
+        ]}
+        contactInfo={{
+          email: "info@company.com",
+          phone: "(555) 555-5555",
+          address: "123 Main St, Cityville",
+        }}
+      />
+
+
     </div>
   );
 }
