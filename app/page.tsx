@@ -5,7 +5,6 @@ import { Button } from "../components/ui/button";
 import MarketingBannerV1 from "@/components/marketing-banner-v1";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import Head from "next/head";
 
 // Updated interface to match Kibo's actual product structure
 interface KiboProduct {
@@ -170,12 +169,12 @@ export default function Home() {
                     )}
                     {product.inventoryInfo?.onlineStockAvailable !==
                       undefined && (
-                        <p className="text-sm text-gray-500 mt-2">
-                          {product.inventoryInfo.onlineStockAvailable > 0
-                            ? `In Stock: ${product.inventoryInfo.onlineStockAvailable}`
-                            : "Out of Stock"}
-                        </p>
-                      )}
+                      <p className="text-sm text-gray-500 mt-2">
+                        {product.inventoryInfo.onlineStockAvailable > 0
+                          ? `In Stock: ${product.inventoryInfo.onlineStockAvailable}`
+                          : "Out of Stock"}
+                      </p>
+                    )}
                   </div>
                 );
               })}
@@ -199,38 +198,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <Footer
-        sections={[
-          {
-            title: "Shop",
-            links: [
-              { title: "All Products", href: "/products" },
-              { title: "Electronics", href: "/categories/electronics" },
-              { title: "Accessories", href: "/categories/accessories" },
-              { title: "Sale", href: "/sale" },
-            ],
-          },
-          {
-            title: "Support",
-            links: [
-              { title: "Contact Us", href: "/contact" },
-              { title: "FAQ", href: "/faq" },
-              { title: "Shipping", href: "/shipping" },
-              { title: "Returns", href: "/returns" },
-            ],
-          }
-        ]}
-        socialLinks={[
-          { name: "Twitter", href: "https://twitter.com/", icon: () => <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter" className="w-5 h-5" /> },
-        ]}
-        contactInfo={{
-          email: "info@company.com",
-          phone: "(555) 555-5555",
-          address: "123 Main St, Cityville",
-        }}
-      />
-
-
+      <Footer />
     </div>
   );
 }
