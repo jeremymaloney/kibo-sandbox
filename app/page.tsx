@@ -6,6 +6,7 @@ import MarketingBannerV1 from "@/components/marketing-banner-v1";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import ProductsDisplay from "@/components/products-display";
+import FaqAccordion from "../components/faqs-accordion";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -92,6 +93,33 @@ export default function Home() {
 
       {/* Products Display Section */}
       <ProductsDisplay products={products} loading={loading} />
+
+      {/* FAQ Section */}
+      <section className="bg-gray-50 px-6">
+        <FaqAccordion
+          items = {[
+            {
+              id: "return-policy",
+              question: "What is your return policy?",
+              answer:
+                "Bacon ipsum dolor amet pork loin ribeye beef, tail jowl spare ribs short loin flank t-bone tenderloin meatball fatback hamburger ball tip. Landjaeger swine porchetta brisket buffalo, sirloin turducken. Pork ground round flank, strip steak frankfurter chuck pancetta alcatra kielbasa swine. Ground round cow short ribs spare ribs burgdoggen chuck prosciutto boudin shankle cupim filet mignon. Sirloin kevin ham turkey, ribeye tri-tip biltong porchetta hamburger drumstick. Tenderloin kielbasa sirloin pork belly cow burgdoggen jowl biltong pig ham hock salami ribeye andouille brisket ball tip. Pastrami drumstick short loin buffalo tenderloin brisket pig ham hock meatball leberkas frankfurter pork belly bresaola.",
+            },
+            {
+              id: "shipping-time",
+              question: "How long does shipping take?",
+              answer:
+                "Bacon ipsum dolor amet biltong cow chicken, jowl picanha spare ribs beef strip steak hamburger venison porchetta filet mignon pig. Biltong jowl brisket ham bacon flank prosciutto pastrami, doner swine pork belly burgdoggen. Shankle tenderloin salami, venison bresaola chislic pork biltong picanha jerky. Pork belly kevin drumstick hamburger pastrami. Pancetta bacon leberkas ribeye. Pork chop strip steak pork belly, kielbasa venison meatball fatback chicken.",
+            },
+            {
+              id: "international-shipping",
+              question: "Do you ship internationally?",
+              answer:
+                "Bacon ipsum dolor amet short ribs pastrami leberkas shoulder brisket kielbasa shank ribeye pancetta ham hock. Shankle chislic beef ribs buffalo hamburger rump ground round tail ball tip burgdoggen tenderloin strip steak pork belly landjaeger tri-tip.",
+            },
+          ]}
+          className = "w-full max-w-[700px] mx-auto"
+        />
+      </section>
 
       {/* CTA Section */}
       <section className="bg-gray-50 py-16">
