@@ -26,6 +26,11 @@ Before you begin, ensure you have the following installed on your system:
   ```
 - **Installation:**
   - **Windows/macOS:** Download from [nodejs.org](https://nodejs.org/)
+    If you run into errors about not having permissions to run scripts, run this:
+    ```bash
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+    ```
+    You also may need to restart your computer after installing Node.
   - **macOS (via Homebrew):**
     ```bash
     brew install node@20
