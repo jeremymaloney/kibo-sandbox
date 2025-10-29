@@ -112,6 +112,133 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Red Theme - Compact, Minimal & Square */
+.theme-red {
+  /* Colors - Red/Warm tones */
+  --background: oklch(0.98 0.01 20);
+  --foreground: oklch(0.15 0.02 20);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 20);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 20);
+
+  --primary: oklch(0.50 0.22 25);
+  --primary-foreground: oklch(0.98 0.01 25);
+
+  --secondary: oklch(0.90 0.02 20);
+  --secondary-foreground: oklch(0.15 0.02 20);
+
+  --muted: oklch(0.94 0.01 20);
+  --muted-foreground: oklch(0.40 0.02 20);
+
+  --accent: oklch(0.88 0.03 20);
+  --accent-foreground: oklch(0.15 0.02 20);
+
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+
+  --border: oklch(0.85 0.02 20);
+  --input: oklch(0.85 0.02 20);
+  --ring: oklch(0.50 0.22 25);
+
+  --chart-1: oklch(0.6 0.22 25);
+  --chart-2: oklch(0.65 0.18 40);
+  --chart-3: oklch(0.7 0.15 10);
+  --chart-4: oklch(0.55 0.2 350);
+  --chart-5: oklch(0.6 0.16 60);
+
+  /* Spacing & Border Radius - Compact & Square */
+  --radius: 0.25rem; /* Minimal rounded corners (almost square) */
+  --spacing-scale: 0.75; /* 25% less spacing - compact */
+  --text-scale: 0.9; /* Smaller text - minimal */
+}
+
+/* Blue Theme - Spacious, Informative & Rounded */
+.theme-blue {
+  /* Colors - Blue/Cool tones */
+  --background: oklch(0.98 0.01 240);
+  --foreground: oklch(0.15 0.02 240);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 240);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 240);
+
+  --primary: oklch(0.50 0.18 250);
+  --primary-foreground: oklch(0.98 0.01 250);
+
+  --secondary: oklch(0.90 0.02 240);
+  --secondary-foreground: oklch(0.15 0.02 240);
+
+  --muted: oklch(0.94 0.01 240);
+  --muted-foreground: oklch(0.40 0.02 240);
+
+  --accent: oklch(0.88 0.03 240);
+  --accent-foreground: oklch(0.15 0.02 240);
+
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
+
+  --border: oklch(0.85 0.02 240);
+  --input: oklch(0.85 0.02 240);
+  --ring: oklch(0.50 0.18 250);
+
+  --chart-1: oklch(0.6 0.2 250);
+  --chart-2: oklch(0.7 0.15 200);
+  --chart-3: oklch(0.65 0.18 280);
+  --chart-4: oklch(0.75 0.12 150);
+  --chart-5: oklch(0.68 0.16 320);
+
+  /* Spacing & Border Radius - Spacious & Rounded */
+  --radius: 1rem; /* Large rounded corners */
+  --spacing-scale: 1.5; /* 50% more spacing - spacious */
+  --text-scale: 1.15; /* Larger text - more information */
+}
+
+/* Theme-aware spacing utilities */
+@layer utilities {
+  /* Padding utilities that scale with theme */
+  .p-theme-sm { padding: calc(0.5rem * var(--spacing-scale, 1)); }
+  .p-theme-md { padding: calc(1rem * var(--spacing-scale, 1)); }
+  .p-theme-lg { padding: calc(1.5rem * var(--spacing-scale, 1)); }
+  .p-theme-xl { padding: calc(2rem * var(--spacing-scale, 1)); }
+
+  .px-theme-sm { padding-left: calc(0.5rem * var(--spacing-scale, 1)); padding-right: calc(0.5rem * var(--spacing-scale, 1)); }
+  .px-theme-md { padding-left: calc(1rem * var(--spacing-scale, 1)); padding-right: calc(1rem * var(--spacing-scale, 1)); }
+  .px-theme-lg { padding-left: calc(1.5rem * var(--spacing-scale, 1)); padding-right: calc(1.5rem * var(--spacing-scale, 1)); }
+  .px-theme-xl { padding-left: calc(2rem * var(--spacing-scale, 1)); padding-right: calc(2rem * var(--spacing-scale, 1)); }
+
+  .py-theme-sm { padding-top: calc(0.5rem * var(--spacing-scale, 1)); padding-bottom: calc(0.5rem * var(--spacing-scale, 1)); }
+  .py-theme-md { padding-top: calc(1rem * var(--spacing-scale, 1)); padding-bottom: calc(1rem * var(--spacing-scale, 1)); }
+  .py-theme-lg { padding-top: calc(1.5rem * var(--spacing-scale, 1)); padding-bottom: calc(1.5rem * var(--spacing-scale, 1)); }
+  .py-theme-xl { padding-top: calc(2rem * var(--spacing-scale, 1)); padding-bottom: calc(2rem * var(--spacing-scale, 1)); }
+
+  /* Gap utilities that scale with theme */
+  .gap-theme-sm { gap: calc(0.5rem * var(--spacing-scale, 1)); }
+  .gap-theme-md { gap: calc(1rem * var(--spacing-scale, 1)); }
+  .gap-theme-lg { gap: calc(1.5rem * var(--spacing-scale, 1)); }
+  .gap-theme-xl { gap: calc(2rem * var(--spacing-scale, 1)); }
+
+  /* Margin utilities that scale with theme */
+  .m-theme-sm { margin: calc(0.5rem * var(--spacing-scale, 1)); }
+  .m-theme-md { margin: calc(1rem * var(--spacing-scale, 1)); }
+  .m-theme-lg { margin: calc(1.5rem * var(--spacing-scale, 1)); }
+  .m-theme-xl { margin: calc(2rem * var(--spacing-scale, 1)); }
+
+  /* Text size utilities that scale with theme */
+  .text-theme-xs { font-size: calc(0.75rem * var(--text-scale, 1)); }
+  .text-theme-sm { font-size: calc(0.875rem * var(--text-scale, 1)); }
+  .text-theme-base { font-size: calc(1rem * var(--text-scale, 1)); }
+  .text-theme-lg { font-size: calc(1.125rem * var(--text-scale, 1)); }
+  .text-theme-xl { font-size: calc(1.25rem * var(--text-scale, 1)); }
+  .text-theme-2xl { font-size: calc(1.5rem * var(--text-scale, 1)); }
+  .text-theme-3xl { font-size: calc(1.875rem * var(--text-scale, 1)); }
+  .text-theme-4xl { font-size: calc(2.25rem * var(--text-scale, 1)); }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

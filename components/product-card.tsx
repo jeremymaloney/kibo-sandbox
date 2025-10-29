@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import StarRating from "@/components/star-rating";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/contexts/theme-context";
 
 interface ProductCardProps {
   id?: string;
@@ -61,6 +62,7 @@ export default function ProductCard({
     alert("Buy now clicked. Implement buy now functionality here!");
   },
 }: ProductCardProps) {
+  const { theme } = useTheme();
   const [imageError, setImageError] = useState(false);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
   const [isBuyingNow, setIsBuyingNow] = useState(false);
@@ -93,11 +95,23 @@ export default function ProductCard({
     <Card
       className={cn(
         "mx-auto w-full max-w-sm overflow-hidden transition-all hover:shadow-lg",
+        // Red theme: compact, minimal, dense
+        theme === "red" && "shadow-sm hover:shadow-md",
+        // Blue theme: spacious, elevated, prominent
+        theme === "blue" && "shadow-md hover:shadow-xl border-2",
         className
       )}
     >
       <article aria-label={`${name} product`}>
-        <div className="relative h-60 bg-muted">
+        <div
+          className={cn(
+            "relative bg-muted",
+            // Red theme: smaller image, compact
+            theme === "red" && "h-48",
+            // Blue theme: larger image, spacious
+            theme === "blue" && "h-72"
+          )}
+        >
           {!imageError ? (
             <Image
               src={image || "/placeholder.svg"}
@@ -110,12 +124,16 @@ export default function ProductCard({
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-              <span className="text-sm">Image unavailable</span>
+              <span className="text-theme-sm">Image unavailable</span>
             </div>
           )}
           {discount && (
             <Badge
-              className="absolute top-2 right-2 bg-red-500 hover:bg-red-600"
+              className={cn(
+                "absolute bg-red-500 hover:bg-red-600",
+                theme === "red" && "top-1 right-1 text-xs px-1.5 py-0.5",
+                theme === "blue" && "top-3 right-3 text-sm px-3 py-1"
+              )}
               aria-label={`${discount}% discount available`}
             >
               {discount}% OFF
@@ -123,7 +141,11 @@ export default function ProductCard({
           )}
           {!inStock && (
             <Badge
-              className="absolute bottom-2 left-2 bg-gray-500"
+              className={cn(
+                "absolute bg-gray-500",
+                theme === "red" && "bottom-1 left-1 text-xs px-1.5 py-0.5",
+                theme === "blue" && "bottom-3 left-3 text-sm px-3 py-1"
+              )}
               aria-label="Out of stock"
             >
               Out of Stock
@@ -131,9 +153,17 @@ export default function ProductCard({
           )}
         </div>
 
-        <CardHeader className="p-4">
-          <div className="flex items-center justify-between gap-2">
-            <h3 className="line-clamp-1 flex-1 text-lg font-semibold">
+        <CardHeader
+          className={cn(theme === "red" && "p-3", theme === "blue" && "p-6")}
+        >
+          <div className="flex items-center justify-between gap-theme-sm">
+            <h3
+              className={cn(
+                "line-clamp-1 flex-1 font-semibold",
+                theme === "red" && "text-base",
+                theme === "blue" && "text-xl"
+              )}
+            >
               {name}
             </h3>
             {showFavourite && (
@@ -154,7 +184,11 @@ export default function ProductCard({
             )}
           </div>
           <div
-            className="mt-1 flex items-center gap-2"
+            className={cn(
+              "flex items-center gap-theme-sm",
+              theme === "red" && "mt-1",
+              theme === "blue" && "mt-3"
+            )}
             aria-label={`${rating} out of 5 stars`}
           >
             <StarRating
@@ -166,23 +200,41 @@ export default function ProductCard({
             />
             {reviewCount && (
               <span
-                className="text-sm text-muted-foreground"
+                className={cn(
+                  "text-muted-foreground",
+                  theme === "red" && "text-xs",
+                  theme === "blue" && "text-base"
+                )}
                 aria-label={`${reviewCount} reviews`}
               >
                 ({reviewCount})
               </span>
             )}
           </div>
-          <div className="mt-2 flex items-center gap-2">
+          <div
+            className={cn(
+              "flex items-center gap-theme-sm",
+              theme === "red" && "mt-1.5",
+              theme === "blue" && "mt-4"
+            )}
+          >
             <span
-              className="text-lg font-bold text-primary"
+              className={cn(
+                "font-bold text-primary",
+                theme === "red" && "text-base",
+                theme === "blue" && "text-2xl"
+              )}
               aria-label={`Current price ${formatPrice(price)}`}
             >
               {formatPrice(price)}
             </span>
             {originalPrice && originalPrice > price && (
               <span
-                className="text-sm text-muted-foreground line-through"
+                className={cn(
+                  "text-muted-foreground line-through",
+                  theme === "red" && "text-xs",
+                  theme === "blue" && "text-base"
+                )}
                 aria-label={`Original price ${formatPrice(originalPrice)}`}
               >
                 {formatPrice(originalPrice)}
@@ -191,27 +243,38 @@ export default function ProductCard({
           </div>
         </CardHeader>
 
-        <CardContent className="p-4 pt-0">
-          <p className="line-clamp-2 text-sm text-muted-foreground">
-            {description}
-          </p>
-        </CardContent>
+        {/* Blue theme shows description, Red theme hides it for minimal look */}
+        {theme === "blue" && (
+          <CardContent className="px-6 pb-4">
+            <p className="line-clamp-3 text-base text-muted-foreground leading-relaxed">
+              {description}
+            </p>
+          </CardContent>
+        )}
 
-        <CardFooter className="flex gap-2 p-4 pt-0">
+        <CardFooter
+          className={cn(
+            "flex gap-theme-sm",
+            theme === "red" && "p-3 pt-0 flex-col",
+            theme === "blue" && "p-6 pt-0 flex-row"
+          )}
+        >
           <Button
-            className="flex-1"
+            className="flex-1 w-full"
             onClick={handleBuyNow}
             disabled={!inStock || isBuyingNow}
             aria-label={`Buy ${name} now`}
+            size={theme === "red" ? "sm" : "default"}
           >
             {isBuyingNow ? "Processing..." : "Buy Now"}
           </Button>
           <Button
             variant="outline"
-            className="flex-1"
+            className="flex-1 w-full"
             onClick={handleAddToCart}
             disabled={!inStock || isAddingToCart}
             aria-label={`Add ${name} to cart`}
+            size={theme === "red" ? "sm" : "default"}
           >
             {isAddingToCart ? "Adding..." : "Add to Cart"}
           </Button>

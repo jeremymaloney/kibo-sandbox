@@ -48,20 +48,22 @@ export default function ProductsDisplay({
   loading,
 }: ProductsDisplayProps) {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+    <section className="py-theme-xl bg-muted">
+      <div className="container mx-auto px-theme-lg">
+        <h2 className="text-theme-3xl font-bold text-center mb-12 text-foreground">
           Product Catalog ({loading ? "..." : products.length} items)
         </h2>
 
         {loading ? (
-          <div className="text-center text-gray-600">Loading products...</div>
+          <div className="text-center text-muted-foreground text-theme-base">
+            Loading products...
+          </div>
         ) : products.length === 0 ? (
-          <div className="text-center text-gray-600">
+          <div className="text-center text-muted-foreground text-theme-base">
             <p>No products found in your Kibo catalog.</p>
           </div>
         ) : (
-          <div className="grid sm: grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-theme-lg">
             {products.map((product) => (
               <ProductCard
                 key={product.productCode}
