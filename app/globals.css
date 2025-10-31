@@ -37,6 +37,8 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight: var(--highlight);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -149,6 +151,10 @@
   --chart-4: oklch(0.55 0.2 350);
   --chart-5: oklch(0.6 0.16 60);
 
+  /* Highlight color - Bright orange for SALE badges and special callouts */
+  --highlight: oklch(0.65 0.25 50);
+  --highlight-foreground: oklch(0.98 0.01 50);
+
   /* Spacing & Border Radius - Compact & Square */
   --radius: 0.25rem; /* Minimal rounded corners (almost square) */
   --spacing-scale: 0.75; /* 25% less spacing - compact */
@@ -191,6 +197,10 @@
   --chart-3: oklch(0.65 0.18 280);
   --chart-4: oklch(0.75 0.12 150);
   --chart-5: oklch(0.68 0.16 320);
+
+  /* Highlight color - Bright cyan/teal for SALE badges and special callouts */
+  --highlight: oklch(0.70 0.20 200);
+  --highlight-foreground: oklch(0.98 0.01 200);
 
   /* Spacing & Border Radius - Spacious & Rounded */
   --radius: 1rem; /* Large rounded corners */

@@ -19,7 +19,9 @@ interface ProductCardProps {
   id?: string;
   name?: string;
   description?: string;
+  fullDescription?: string;
   price?: number;
+  salePrice?: number;
   originalPrice?: number;
   currency?: string;
   rating?: number;
@@ -31,16 +33,20 @@ interface ProductCardProps {
   showFavourite?: boolean;
   favourite?: boolean;
   className?: string;
+  images?: string[];
   onFavourite?: (id: string, favourite: boolean) => void;
   onAddToCart?: (id: string) => void;
   onBuyNow?: (id: string) => void;
+  onClick?: (id: string) => void;
 }
 
 export default function ProductCard({
   id = "1",
   name = "Premium Wireless Headphones",
   description = "High-quality wireless headphones with noise cancellation and premium sound quality. Perfect for music lovers and professionals.",
+  fullDescription,
   price = 199.99,
+  salePrice,
   originalPrice,
   currency = "USD",
   rating = 4.5,
@@ -52,6 +58,7 @@ export default function ProductCard({
   showFavourite = false,
   favourite = false,
   className,
+  images,
   onFavourite = () => {
     alert("Favourite clicked. Implement favourite functionality here!");
   },
@@ -61,6 +68,7 @@ export default function ProductCard({
   onBuyNow = () => {
     alert("Buy now clicked. Implement buy now functionality here!");
   },
+  onClick,
 }: ProductCardProps) {
   const { theme } = useTheme();
   const [imageError, setImageError] = useState(false);
@@ -74,33 +82,48 @@ export default function ProductCard({
     }).format(amount);
   };
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
     setIsAddingToCart(true);
     try {
-      await onAddToCart(id);
+      onAddToCart(id);
     } finally {
       setIsAddingToCart(false);
     }
   };
 
-  const handleBuyNow = async () => {
+  const handleBuyNow = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
     setIsBuyingNow(true);
     try {
-      await onBuyNow(id);
+      onBuyNow(id);
     } finally {
       setIsBuyingNow(false);
     }
   };
+
+  const handleFavouriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click
+    onFavourite(id, !favourite);
+  };
+  const handleCardClick = () => {
+    if (onClick) {
+      onClick(id);
+    }
+  };
+
   return (
     <Card
       className={cn(
-        "mx-auto w-full max-w-sm overflow-hidden transition-all hover:shadow-lg",
+        "mx-auto w-full max-w-sm overflow-hidden transition-all cursor-pointer",
         // Red theme: compact, minimal, dense
-        theme === "red" && "shadow-sm hover:shadow-md",
+        theme === "red" && "shadow-sm hover:shadow-md hover:shadow-primary/30",
         // Blue theme: spacious, elevated, prominent
-        theme === "blue" && "shadow-md hover:shadow-xl border-2",
+        theme === "blue" &&
+          "shadow-md hover:shadow-xl hover:shadow-primary/40 border-2",
         className
       )}
+      onClick={handleCardClick}
     >
       <article aria-label={`${name} product`}>
         <div
@@ -170,7 +193,7 @@ export default function ProductCard({
               <Button
                 size="icon"
                 variant="ghost"
-                onClick={() => onFavourite(id, !favourite)}
+                onClick={handleFavouriteClick}
                 aria-label={
                   favourite
                     ? `Remove ${name} from favorites`
@@ -213,7 +236,7 @@ export default function ProductCard({
           </div>
           <div
             className={cn(
-              "flex items-center gap-theme-sm",
+              "flex items-center gap-theme-sm flex-wrap",
               theme === "red" && "mt-1.5",
               theme === "blue" && "mt-4"
             )}
@@ -224,11 +247,11 @@ export default function ProductCard({
                 theme === "red" && "text-base",
                 theme === "blue" && "text-2xl"
               )}
-              aria-label={`Current price ${formatPrice(price)}`}
+              aria-label={`Current price ${formatPrice(salePrice || price)}`}
             >
-              {formatPrice(price)}
+              {formatPrice(salePrice || price)}
             </span>
-            {originalPrice && originalPrice > price && (
+            {originalPrice && originalPrice > (salePrice || price) && (
               <span
                 className={cn(
                   "text-muted-foreground line-through",
@@ -239,6 +262,11 @@ export default function ProductCard({
               >
                 {formatPrice(originalPrice)}
               </span>
+            )}
+            {salePrice && salePrice < price && (
+              <Badge className="bg-highlight text-highlight-foreground hover:bg-highlight/90 text-xs font-bold">
+                SALE
+              </Badge>
             )}
           </div>
         </CardHeader>
