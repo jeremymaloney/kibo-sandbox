@@ -9,9 +9,20 @@ import ProductsDisplay from "@/components/products-display";
 import FaqAccordion from "../components/faqs-accordion";
 import ThemeSwitcher from "@/components/theme-switcher";
 
+interface HeroBannerEntity {
+  id: string;
+  isActive: boolean;
+  title?: string;
+  description?: string;
+  cta?: string;
+  imageUrl?: string;
+}
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [heroBanner, setHeroBanner] = useState<HeroBannerEntity | null>(null);
+  const [bannerLoading, setBannerLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -30,6 +41,30 @@ export default function Home() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    async function fetchHeroBanner() {
+      try {
+        const response = await fetch("/api/hero-banner");
+        const data = await response.json();
+        console.log("Hero Banner API Response:", data);
+
+        // Find the active banner
+        const activeBanner = data.data?.find(
+          (banner: HeroBannerEntity) => banner.isActive === true
+        );
+        if (activeBanner) {
+          setHeroBanner(activeBanner);
+        }
+      } catch (error) {
+        console.error("Error fetching hero banner:", error);
+      } finally {
+        setBannerLoading(false);
+      }
+    }
+
+    fetchHeroBanner();
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Header/Navigation */}
@@ -43,12 +78,14 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <MarketingBannerV1
-        title="I'm a Marketing Banner!"
-        description="A reusable banner component made from Aries-UI"
-        badgeText="Super cool!"
-        imageUrl="vercel.svg"
-      />
+      {!bannerLoading && heroBanner && (
+        <MarketingBannerV1
+          title={heroBanner.title}
+          description={heroBanner.description}
+          badgeText={heroBanner.cta}
+          imageUrl={heroBanner.imageUrl || "vercel.svg"}
+        />
+      )}
 
       <section className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-theme-xl">
         <div className="container mx-auto px-theme-lg text-center">
