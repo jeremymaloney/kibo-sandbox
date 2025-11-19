@@ -43,6 +43,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-bt-light-blue: #004d71;
+  --color-bt-blue: #004165;
+  --color-bt-dark-blue: #00324d;
+  --color-bt-yellow: #f0ab00;
 }
 
 :root {
@@ -255,5 +259,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .headerNavIconWrapper {
+    @apply w-1/4 flex justify-center items-center py-4 border-r border-gray-400;
+  }
+  .headerNavIconWrapper svg {
+    @apply text-white cursor-pointer hover:text-bt-yellow;
   }
 }

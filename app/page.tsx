@@ -8,6 +8,7 @@ import Footer from "../components/footer";
 import ProductsDisplay from "@/components/products-display";
 import FaqAccordion from "../components/faqs-accordion";
 import ThemeSwitcher from "@/components/theme-switcher";
+import Link from "next/link";
 
 interface HeroBannerEntity {
   id: string;
@@ -100,6 +101,15 @@ export default function Home() {
         <div className="container mx-auto px-theme-lg flex justify-center">
           <ThemeSwitcher />
         </div>
+      </div>
+
+      <div className="text-center p-4">
+        <Link
+          href={"/boundtree"}
+          className="font-bold text-2xl text-primary hover:text-primary/80 transition-colors"
+        >
+          Go to Bound Tree
+        </Link>
       </div>
 
       {/* Hero Section */}
