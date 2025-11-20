@@ -1,0 +1,523 @@
+/* Shared CMS Page Styles */
+
+.cms-page-content {
+  line-height: 1.625;
+}
+
+.cms-page-content * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cms-page-content p,
+.cms-page-content span,
+.cms-page-content div {
+  color: hsl(var(--foreground));
+}
+
+/* Container */
+.cms-page-content .container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: calc(var(--spacing-scale) * 4rem) calc(var(--spacing-scale) * 2rem);
+}
+
+/* H1 Primary Color - Must be last to override everything */
+.cms-page-content h1 {
+  color: var(--primary) !important;
+}
+
+/* ============================================
+   SUPPORT PAGE STYLES
+   ============================================ */
+
+/* Hero Section */
+.cms-page-content.support-style .support-hero {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.1) 0%,
+    hsl(var(--primary) / 0.05) 100%
+  );
+  border-bottom: 1px solid hsl(var(--border));
+  text-align: center;
+  padding: calc(var(--spacing-scale) * 4rem) calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .support-hero h1 {
+  font-weight: 700;
+  line-height: 1.25;
+  font-size: calc(var(--text-scale) * clamp(2rem, 5vw, 3.5rem));
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .support-hero .subtitle {
+  color: hsl(var(--muted-foreground));
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: calc(var(--text-scale) * clamp(1rem, 2.5vw, 1.25rem));
+}
+
+/* Grid Layout */
+.cms-page-content.support-style .support-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin: calc(var(--spacing-scale) * 3rem) 0;
+}
+
+/* Cards */
+.cms-page-content.support-style .support-card {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: all 0.3s ease;
+  padding: calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.support-style .support-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border-color: hsl(var(--primary) / 0.5);
+}
+
+.cms-page-content.support-style .support-card .icon {
+  display: block;
+  font-size: calc(var(--text-scale) * 3rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .support-card h3 {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  font-size: calc(var(--text-scale) * 1.5rem);
+  margin-bottom: calc(var(--spacing-scale) * 0.75rem);
+}
+
+.cms-page-content.support-style .support-card p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  font-size: calc(var(--text-scale) * 1rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .support-card a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-size: calc(var(--text-scale) * 1rem);
+  gap: calc(var(--spacing-scale) * 0.5rem);
+}
+
+.cms-page-content.support-style .support-card a:hover {
+  text-decoration: underline;
+  gap: calc(var(--spacing-scale) * 0.75rem);
+}
+
+/* FAQ Section */
+.cms-page-content.support-style .faq-section {
+  background: hsl(var(--muted) / 0.3);
+  border-radius: var(--radius);
+  padding: calc(var(--spacing-scale) * 3rem) calc(var(--spacing-scale) * 2rem);
+  margin: calc(var(--spacing-scale) * 3rem) 0;
+}
+
+.cms-page-content.support-style .faq-section h2 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  text-align: center;
+  font-size: calc(var(--text-scale) * 2rem);
+  margin-bottom: calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.support-style .faq-item {
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: calc(var(--spacing-scale) * 1.5rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .faq-item h4 {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  font-size: calc(var(--text-scale) * 1.125rem);
+  margin-bottom: calc(var(--spacing-scale) * 0.75rem);
+}
+
+.cms-page-content.support-style .faq-item p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  font-size: calc(var(--text-scale) * 1rem);
+}
+
+/* Contact Section */
+.cms-page-content.support-style .contact-section {
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.05) 0%,
+    hsl(var(--primary) / 0.1) 100%
+  );
+  border-radius: var(--radius);
+  padding: calc(var(--spacing-scale) * 3rem) calc(var(--spacing-scale) * 2rem);
+  margin: calc(var(--spacing-scale) * 3rem) 0;
+}
+
+.cms-page-content.support-style .contact-section h2 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  font-size: calc(var(--text-scale) * 2rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.support-style .contact-section p {
+  color: hsl(var(--muted-foreground));
+  font-size: calc(var(--text-scale) * 1.125rem);
+  margin-bottom: calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.support-style .contact-section .contact-methods {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-scale) * 2rem);
+  margin-top: calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.support-style .contact-section .contact-method {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--spacing-scale) * 0.5rem);
+}
+
+.cms-page-content.support-style .contact-section .contact-method .icon {
+  font-size: calc(var(--text-scale) * 2rem);
+}
+
+.cms-page-content.support-style .contact-section .contact-method a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  font-weight: 600;
+  font-size: calc(var(--text-scale) * 1.125rem);
+}
+
+.cms-page-content.support-style .contact-section .contact-method a:hover {
+  text-decoration: underline;
+}
+
+.cms-page-content.support-style .contact-section .contact-method .label {
+  color: hsl(var(--muted-foreground));
+  font-size: calc(var(--text-scale) * 0.875rem);
+}
+
+/* Responsive - Support */
+@media (max-width: 768px) {
+  .cms-page-content.support-style .support-hero {
+    padding: calc(var(--spacing-scale) * 3rem) calc(var(--spacing-scale) * 1rem);
+  }
+
+  .cms-page-content.support-style .container {
+    padding: calc(var(--spacing-scale) * 2rem) calc(var(--spacing-scale) * 1rem);
+  }
+
+  .cms-page-content.support-style .support-grid {
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-scale) * 1.5rem);
+  }
+
+  .cms-page-content.support-style .faq-section,
+  .cms-page-content.support-style .contact-section {
+    padding: calc(var(--spacing-scale) * 2rem) calc(var(--spacing-scale) * 1rem);
+  }
+}
+
+/* ============================================
+   ABOUT PAGE STYLES
+   ============================================ */
+
+/* Hero Section - Full width with overlay */
+.cms-page-content.about-style .about-hero {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--primary) / 0.2) 0%,
+    hsl(var(--primary) / 0.05) 50%,
+    hsl(var(--background)) 100%
+  );
+  padding: calc(var(--spacing-scale) * 6rem) calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.about-style .about-hero::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: radial-gradient(
+    circle at 30% 50%,
+    hsl(var(--primary) / 0.15) 0%,
+    transparent 50%
+  );
+}
+
+.cms-page-content.about-style .about-hero h1 {
+  font-weight: 800;
+  line-height: 1.25;
+  position: relative;
+  z-index: 10;
+  font-size: calc(var(--text-scale) * clamp(2.5rem, 6vw, 4rem));
+  margin-bottom: calc(var(--spacing-scale) * 1.5rem);
+}
+
+.cms-page-content.about-style .about-hero .tagline {
+  color: hsl(var(--muted-foreground));
+  max-width: 800px;
+  margin: 0 auto;
+  font-weight: 300;
+  position: relative;
+  z-index: 10;
+  font-size: calc(var(--text-scale) * clamp(1.25rem, 3vw, 1.75rem));
+}
+
+/* Stats Section */
+.cms-page-content.about-style .stats-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background: hsl(var(--card));
+  border-top: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+  gap: calc(var(--spacing-scale) * 3rem);
+  padding: calc(var(--spacing-scale) * 4rem) calc(var(--spacing-scale) * 2rem);
+  margin: calc(var(--spacing-scale) * 4rem) 0;
+}
+
+.cms-page-content.about-style .stat-item {
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+}
+
+.cms-page-content.about-style .stat-item .number {
+  font-weight: 800;
+  line-height: 1;
+  font-size: calc(var(--text-scale) * 3rem);
+  color: var(--primary);
+  margin-bottom: calc(var(--spacing-scale) * 0.5rem);
+}
+
+.cms-page-content.about-style .stat-item .label {
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  font-size: calc(var(--text-scale) * 1rem);
+}
+
+/* Story Section - Two Column Layout */
+.cms-page-content.about-style .story-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: calc(var(--spacing-scale) * 4rem);
+  margin: calc(var(--spacing-scale) * 4rem) 0;
+}
+
+.cms-page-content.about-style .story-section.reverse {
+  direction: rtl;
+}
+
+.cms-page-content.about-style .story-section.reverse > * {
+  direction: ltr;
+}
+
+.cms-page-content.about-style .story-content h2 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  line-height: 1.25;
+  font-size: calc(var(--text-scale) * 2.5rem);
+  margin-bottom: calc(var(--spacing-scale) * 1.5rem);
+}
+
+.cms-page-content.about-style .story-content p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  font-size: calc(var(--text-scale) * 1.125rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.about-style .story-image {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary) / 0.1) 0%,
+    hsl(var(--primary) / 0.05) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  border-radius: calc(var(--radius) * 2);
+  padding: calc(var(--spacing-scale) * 3rem);
+}
+
+.cms-page-content.about-style .story-image .placeholder {
+  opacity: 0.5;
+  font-size: calc(var(--text-scale) * 6rem);
+}
+
+/* Values Grid - 3 Column */
+.cms-page-content.about-style .values-section {
+  margin: calc(var(--spacing-scale) * 5rem) 0;
+}
+
+.cms-page-content.about-style .values-section h2 {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  text-align: center;
+  font-size: calc(var(--text-scale) * 2.5rem);
+  margin-bottom: calc(var(--spacing-scale) * 3rem);
+}
+
+.cms-page-content.about-style .values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--spacing-scale) * 2rem);
+}
+
+.cms-page-content.about-style .value-card {
+  text-align: center;
+  background: hsl(var(--card));
+  border: 2px solid hsl(var(--border));
+  transition: all 0.3s ease;
+  border-radius: calc(var(--radius) * 2);
+  padding: calc(var(--spacing-scale) * 2.5rem);
+}
+
+.cms-page-content.about-style .value-card:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+.cms-page-content.about-style .value-card .icon {
+  display: block;
+  font-size: calc(var(--text-scale) * 4rem);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.about-style .value-card h3 {
+  font-weight: 700;
+  font-size: calc(var(--text-scale) * 1.5rem);
+  color: var(--primary);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.about-style .value-card p {
+  color: hsl(var(--muted-foreground));
+  line-height: 1.625;
+  font-size: calc(var(--text-scale) * 1rem);
+}
+
+/* CTA Section */
+.cms-page-content.about-style .cta-section {
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    hsl(var(--primary) / 0.1) 0%,
+    hsl(var(--primary) / 0.2) 50%,
+    hsl(var(--primary) / 0.1) 100%
+  );
+  border-radius: calc(var(--radius) * 3);
+  padding: calc(var(--spacing-scale) * 5rem) calc(var(--spacing-scale) * 2rem);
+  margin: calc(var(--spacing-scale) * 5rem) 0;
+}
+
+.cms-page-content.about-style .cta-section h2 {
+  font-weight: 800;
+  font-size: calc(var(--text-scale) * 3rem);
+  color: var(--primary);
+  margin-bottom: calc(var(--spacing-scale) * 1rem);
+}
+
+.cms-page-content.about-style .cta-section p {
+  color: hsl(var(--muted-foreground));
+  max-width: 600px;
+  margin: 0 auto calc(var(--spacing-scale) * 2.5rem);
+  font-size: calc(var(--text-scale) * 1.25rem);
+}
+
+.cms-page-content.about-style .cta-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-scale) * 1.5rem);
+}
+
+.cms-page-content.about-style .cta-button {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  padding: calc(var(--spacing-scale) * 1rem) calc(var(--spacing-scale) * 2.5rem);
+  background: var(--primary);
+  color: hsl(var(--primary-foreground));
+  font-size: calc(var(--text-scale) * 1.125rem);
+}
+
+.cms-page-content.about-style .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.cms-page-content.about-style .cta-button.secondary {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+/* Responsive - About */
+@media (max-width: 968px) {
+  .cms-page-content.about-style .story-section {
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-scale) * 2rem);
+  }
+
+  .cms-page-content.about-style .story-section.reverse {
+    direction: ltr;
+  }
+
+  .cms-page-content.about-style .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cms-page-content.about-style .about-hero {
+    padding: calc(var(--spacing-scale) * 4rem) calc(var(--spacing-scale) * 1.5rem);
+  }
+
+  .cms-page-content.about-style .container {
+    padding: calc(var(--spacing-scale) * 2rem) calc(var(--spacing-scale) * 1rem);
+  }
+
+  .cms-page-content.about-style .stats-section {
+    flex-direction: column;
+    gap: calc(var(--spacing-scale) * 2rem);
+  }
+
+  .cms-page-content.about-style .cta-section {
+    padding: calc(var(--spacing-scale) * 3rem) calc(var(--spacing-scale) * 1.5rem);
+  }
+
+  .cms-page-content.about-style .cta-buttons {
+    flex-direction: column;
+  }
+}
+

@@ -205,6 +205,10 @@ export const navigationData: NavItem[] = [
     },
   },
   {
+    title: "About Us",
+    href: "/about",
+  },
+  {
     title: "Support",
     href: "/support",
   },
