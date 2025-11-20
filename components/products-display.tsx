@@ -3,47 +3,13 @@
 import { useState } from "react";
 import ProductCard from "./product-card";
 import ProductDetailPage from "./product-detail-page";
-import { stripHtml, getAbsoluteImageUrl } from "@/utils";
-
-// Product structure
-interface Product {
-  productCode: string;
-  productType?: string;
-  productTypeId?: number;
-  isActive?: boolean;
-  isTaxable?: boolean;
-
-  content?: {
-    productName?: string;
-    productShortDescription?: string;
-    productFullDescription?: string;
-    productImages?: Array<{
-      imageUrl?: string;
-      altText?: string;
-    }>;
-  };
-
-  price?: {
-    price?: number;
-    salePrice?: number;
-    catalogListPrice?: number;
-  };
-
-  inventoryInfo?: {
-    onlineStockAvailable?: number;
-    manageStock?: boolean;
-    outOfStockBehavior?: string;
-    onlineSoftStockAvailable?: number;
-    onlineLocationCode?: string;
-  };
-
-  purchasableState?: {
-    isPurchasable?: boolean;
-  };
-}
+import {
+  transformKiboProduct,
+  type KiboProduct,
+} from "@/utils/product-transformer";
 
 type ProductsDisplayProps = {
-  products: Product[];
+  products: KiboProduct[];
   loading: boolean;
 };
 
@@ -51,7 +17,9 @@ export default function ProductsDisplay({
   products,
   loading,
 }: ProductsDisplayProps) {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<KiboProduct | null>(
+    null
+  );
   const [isPdpOpen, setIsPdpOpen] = useState(false);
 
   const handleProductClick = (productCode: string) => {
@@ -71,14 +39,6 @@ export default function ProductsDisplay({
     console.log(`Buying ${quantity} of product ${productId}`);
     alert(`Proceeding to checkout with ${quantity} item(s)!`);
     setIsPdpOpen(false);
-  };
-
-  // Get all product images
-  const getProductImages = (product: Product) => {
-    const images = product.content?.productImages?.map((img) =>
-      getAbsoluteImageUrl(img.imageUrl)
-    );
-    return images && images.length > 0 ? images : undefined;
   };
 
   return (
@@ -102,24 +62,7 @@ export default function ProductsDisplay({
               {products.map((product) => (
                 <ProductCard
                   key={product.productCode}
-                  id={product.productCode}
-                  name={product.content?.productName}
-                  description={stripHtml(
-                    product.content?.productShortDescription
-                  )}
-                  fullDescription={stripHtml(
-                    product.content?.productFullDescription
-                  )}
-                  price={product.price?.price}
-                  salePrice={product.price?.salePrice}
-                  originalPrice={product.price?.catalogListPrice}
-                  image={
-                    getAbsoluteImageUrl(
-                      product.content?.productImages?.[0]?.imageUrl
-                    ) || "No_image.svg"
-                  }
-                  images={getProductImages(product)}
-                  inStock={product.purchasableState?.isPurchasable}
+                  {...transformKiboProduct(product)}
                   onClick={handleProductClick}
                 />
               ))}
@@ -133,30 +76,7 @@ export default function ProductsDisplay({
         <ProductDetailPage
           open={isPdpOpen}
           onOpenChange={setIsPdpOpen}
-          product={{
-            id: selectedProduct.productCode,
-            productCode: selectedProduct.productCode,
-            name: selectedProduct.content?.productName,
-            description: stripHtml(
-              selectedProduct.content?.productShortDescription
-            ),
-            fullDescription: stripHtml(
-              selectedProduct.content?.productFullDescription
-            ),
-            price: selectedProduct.price?.price,
-            salePrice: selectedProduct.price?.salePrice,
-            originalPrice: selectedProduct.price?.catalogListPrice,
-            image:
-              getAbsoluteImageUrl(
-                selectedProduct.content?.productImages?.[0]?.imageUrl
-              ) || "No_image.svg",
-            imageAlt: selectedProduct.content?.productImages?.[0]?.altText,
-            images: getProductImages(selectedProduct),
-            inStock: selectedProduct.purchasableState?.isPurchasable,
-            stockAvailable: selectedProduct.inventoryInfo?.onlineStockAvailable,
-            rating: 4.5, // TODO: Get from Kibo reviews API
-            reviewCount: 0, // TODO: Get from Kibo reviews API
-          }}
+          product={transformKiboProduct(selectedProduct)}
           onAddToCart={handleAddToCart}
           onBuyNow={handleBuyNow}
         />

@@ -176,3 +176,100 @@ export async function fetchProducts(
   };
 }
 
+/**
+ * Search products using Kibo Catalog API
+ * Fetches all products and filters client-side for simplicity
+ */
+export async function searchProducts(
+  query: string,
+  pageSize: number = 20
+): Promise<{ data: any[]; totalCount: number }> {
+  if (!TENANT_ID || !SITE_ID) {
+    throw new Error('Missing Kibo configuration: KIBO_TENANT_ID or KIBO_SITE_ID');
+  }
+
+  if (!query || query.trim() === '') {
+    return { data: [], totalCount: 0 };
+  }
+
+  // Step 1: Authenticate
+  const accessToken = await authenticate();
+
+  // Step 2: Fetch all products (we'll filter client-side)
+  const productsUrl = `https://t${TENANT_ID}-s${SITE_ID}.sb.usc1.gcp.kibocommerce.com/api/commerce/catalog/storefront/products?pageSize=200`;
+
+  const response = await fetch(productsUrl, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.text();
+    console.error('Failed to fetch products for search. Status:', response.status, 'Response:', errorData);
+    throw new Error(`Failed to fetch products for search (${response.status}): ${errorData}`);
+  }
+
+  const responseData = await response.json();
+  const allProducts = responseData.items || [];
+
+  // Step 3: Filter products by query (case-insensitive search in product name and code)
+  const queryLower = query.toLowerCase();
+  const filteredProducts = allProducts.filter((product: any) => {
+    const productName = product.content?.productName?.toLowerCase() || '';
+    const productCode = product.productCode?.toLowerCase() || '';
+    return productName.includes(queryLower) || productCode.includes(queryLower);
+  });
+
+  // Step 4: Limit results to pageSize
+  const limitedResults = filteredProducts.slice(0, pageSize);
+
+  return {
+    data: limitedResults,
+    totalCount: filteredProducts.length,
+  };
+}
+
+/**
+ * Fetch a single product by product code
+ */
+export async function fetchProductByCode(
+  productCode: string
+): Promise<{ data: any }> {
+  if (!TENANT_ID || !SITE_ID) {
+    throw new Error('Missing Kibo configuration: KIBO_TENANT_ID or KIBO_SITE_ID');
+  }
+
+  if (!productCode || productCode.trim() === '') {
+    throw new Error('Product code is required');
+  }
+
+  // Step 1: Authenticate
+  const accessToken = await authenticate();
+
+  // Step 2: Fetch specific product by product code
+  const productUrl = `https://t${TENANT_ID}-s${SITE_ID}.sb.usc1.gcp.kibocommerce.com/api/commerce/catalog/storefront/products/${encodeURIComponent(productCode)}`;
+
+  const response = await fetch(productUrl, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.text();
+    console.error(`Failed to fetch product ${productCode}. Status:`, response.status, 'Response:', errorData);
+    throw new Error(`Failed to fetch product ${productCode} (${response.status}): ${errorData}`);
+  }
+
+  const productData = await response.json();
+
+  return {
+    data: productData,
+  };
+}
+
