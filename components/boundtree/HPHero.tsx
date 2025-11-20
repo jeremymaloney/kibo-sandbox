@@ -20,7 +20,7 @@ const HPHero = () => {
       </Link>
 
       <div className="grid grid-cols-1 gap-2 lg:flex xl:justify-between lg:gap-3">
-        <div className="lg:h-full lg:flex-1 lg:max-w-[800px]">
+        <div className="lg:h-full lg:w-full lg:min-w-[720px] lg:max-w-[820px]">
           {isMobile && (
             <Image
               src="https://cdn.boundtree.com/assets/btm/Home/Banners/homepage-banner-Spencer-Chair-Promo-mobile-1.jpg"
@@ -45,7 +45,7 @@ const HPHero = () => {
             <Image
               src="https://cdn.boundtree.com/assets/btm/Home/Banners/homepage-banner-Spencer-Chair-Promo-desktop-1.jpg"
               alt="Desktop version image"
-              width={850}
+              width={820}
               height={518}
               priority
               className="lg:h-full lg:w-full lg:object-cover"
@@ -83,7 +83,7 @@ const HPHero = () => {
                 width={514}
                 height={253}
                 priority
-                className="w-full h-auto max-w-[514px] xl:min-w-[435px]"
+                className="w-full h-auto max-w-[514px] xl:min-w-[418px]"
               />
             ) : (
               ""
@@ -117,7 +117,7 @@ const HPHero = () => {
                 width={514}
                 height={253}
                 priority
-                className="w-full h-auto max-w-[514px] xl:min-w-[435px]"
+                className="w-full h-auto max-w-[514px] xl:min-w-[418px]"
               />
             ) : (
               ""
