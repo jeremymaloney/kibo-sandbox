@@ -25,7 +25,7 @@ import SearchBar from "@/components/search-bar";
 import MobileSidebar from "@/components/mobile-sidebar";
 import { navigationData } from "./bt-mega-menu.data";
 import { type MegaMenuProps } from "@/components/types";
-import { BrandLogo } from "./brand-logo";
+import { BTBrandLogo } from "./BTBrandLogo";
 import {
   UserAccountButton,
   CartButton,
@@ -33,15 +33,13 @@ import {
 } from "@/components/action-buttons";
 import { MenuColumn, CTABlock } from "@/components/menu-components";
 
-export default function MegaMenu({
+export default function BTMegaMenu({
   navItems = navigationData,
   showSearchBar = true,
   onLinkClick,
   className,
   ariaLabel = "Main navigation",
-  brandLogo,
   brandLogoAlt = "Brand logo",
-  onBrandClick,
   showUserActions = true,
   showCart = true,
   showLanguageSelector = true,
@@ -64,13 +62,7 @@ export default function MegaMenu({
     [onLinkClick]
   );
 
-  const renderBrandLogo = () => (
-    <BrandLogo
-      brandLogo={brandLogo}
-      brandLogoAlt={brandLogoAlt}
-      onBrandClick={onBrandClick}
-    />
-  );
+  const renderBrandLogo = () => <BTBrandLogo brandLogoAlt={brandLogoAlt} />;
 
   const renderActionButtons = () => (
     <div className="flex justify-end gap-1">
@@ -93,7 +85,7 @@ export default function MegaMenu({
       {/* Desktop Navigation - Two Row Layout */}
       <div
         className={cn(
-          "relative hidden w-full bg-background lg:block",
+          "relative hidden w-full lg:block bg-bt-dark-blue text-white",
           className
         )}
       >
@@ -129,7 +121,7 @@ export default function MegaMenu({
                   <NavigationMenuItem key={item.title}>
                     {item.content ? (
                       <>
-                        <NavigationMenuTrigger>
+                        <NavigationMenuTrigger className="bg-bt-dark-blue">
                           {item.title}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
@@ -203,8 +195,9 @@ export default function MegaMenu({
 
       {/* Mobile Navigation */}
       <header
+        //   flex removed, hidden added
         className={cn(
-          "flex w-full items-center justify-between border-b bg-background px-4 py-2 lg:hidden",
+          "hidden w-full items-center justify-between border-b bg-bt-blue text-white px-4 py-2 lg:hidden",
           className
         )}
         role="banner"

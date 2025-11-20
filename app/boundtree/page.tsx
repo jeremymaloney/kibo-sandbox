@@ -1,11 +1,10 @@
-import BoundTreeHeader from "@/components/boundtree/BoundTreeHeader";
+import HPHero from "@/components/boundtree/HPHero";
 import React from "react";
 
 const BoundTreeHome = () => {
   return (
-    <main>
-      <BoundTreeHeader />
-      BoundTreeHome
+    <main className="">
+      <HPHero />
     </main>
   );
 };

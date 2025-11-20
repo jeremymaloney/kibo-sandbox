@@ -119,7 +119,6 @@ function useDebounce<T>(value: T, delay: number): T {
 
 // --- Kibo API ---
 const kiboSearchAPI = async (query: string): Promise<SearchResult[]> => {
-  debugger;
   if (!query) return [];
 
   try {
@@ -231,7 +230,7 @@ export default function BTSearchBar({
         align="start"
         style={{ width: "var(--radix-popover-trigger-width)" }}
       >
-        <Command>
+        <Command shouldFilter={false}>
           <div className="relative">
             <CommandInput
               value={query}
@@ -270,7 +269,7 @@ export default function BTSearchBar({
                   {query ? "No products found." : "Start typing to search..."}
                 </CommandEmpty>
                 {results.length > 0 && (
-                  <CommandGroup>
+                  <CommandGroup className="p-2">
                     {results.map((item) => (
                       <CommandItem
                         key={item.productCode}

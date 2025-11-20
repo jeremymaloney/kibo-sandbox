@@ -34,137 +34,89 @@ export interface NavItem {
 
 export const navigationData: NavItem[] = [
   {
-    title: "New Arrivals",
+    title: "Products",
     content: {
       columns: [
         {
           items: [
-            {
-              title: "Latest Tech",
-              href: "/products/latest",
-              description: "Newest gadgets and innovations.",
-            },
-            {
-              title: "Pre-Orders",
-              href: "/products/pre-orders",
-              description: "Reserve upcoming releases.",
-            },
-            {
-              title: "Flash Deals",
-              href: "/products/flash-deals",
-              description: "Limited-time tech offers.",
-            },
-          ],
-        },
-      ],
-      cta: {
-        title: "Black Friday Tech Sale",
-        description: "Up to 40% off on top tech brands.",
-        href: "/sale",
-        imgSrc: "/images/mega-menu-cta.jpg",
-      },
-    },
-  },
-  {
-    title: "Computers & Laptops",
-    content: {
-      columns: [
-        {
-          title: "Laptops",
-          href: "/products/laptops",
-          items: [
-            { title: "Gaming Laptops", href: "/products/laptops/gaming" },
-            { title: "Business Laptops", href: "/products/laptops/business" },
-            { title: "Ultrabooks", href: "/products/laptops/ultrabooks" },
-            { title: "MacBooks", href: "/products/laptops/macbooks" },
-          ],
-        },
-        {
-          title: "Desktops & Components",
-          href: "/products/desktops",
-          items: [
-            { title: "Gaming PCs", href: "/products/desktops/gaming" },
-            { title: "Workstations", href: "/products/desktops/workstations" },
-            { title: "Graphics Cards", href: "/products/components/gpu" },
-            { title: "Processors", href: "/products/components/cpu" },
+            { title: "On Sale", href: "/products" },
+            { title: "Airway & Oxygen Delivery", href: "/products" },
+            { title: "Apparel", href: "/products" },
+            { title: "Curaplex", href: "/products" },
+            { title: "Equipment Bags", href: "/products" },
+            { title: "First Aid, Trauma & Wound Care", href: "/products" },
+            { title: "IV & Drug Delivery", href: "/products" },
+            { title: "Immobilization & Splinting", href: "/products" },
+            { title: "Infection Control", href: "/products" },
+            { title: "Inventory Management & Reference", href: "/products" },
+            { title: "Kits", href: "/products" },
+            { title: "Monitoring & Diagnostics", href: "/products" },
+            { title: "Oxygen Equipment & Respiratory", href: "/products" },
+            { title: "Patient Handling", href: "/products" },
+            { title: "Pharmaceuticals", href: "/products" },
+            { title: "Suction", href: "/products" },
+            { title: "Tactical Medicine, MCI & Rescue", href: "/products" },
+            { title: "Training & Simulation", href: "/products" },
           ],
         },
       ],
     },
   },
   {
-    title: "Mobile & Accessories",
+    title: "Pharmaceuticals",
     content: {
       columns: [
         {
-          title: "Smartphones",
-          href: "/products/smartphones",
+          title: "Shop",
+          href: "/products",
           items: [
+            { title: "Controlled Substances", href: "/class-iv-drugs/c/234" },
+            { title: "Drugs Sold by Each", href: "/products" },
+            { title: "IV Admin Sets", href: "/products" },
+            { title: "IV Fluids, Flushes & Solutions", href: "/products" },
+            { title: "OTC Medicinals", href: "/products" },
+            { title: "Pharma Kits", href: "/products" },
+            { title: "Rx Pharmaceuticals", href: "/products" },
+          ],
+        },
+        {
+          title: "How To Order",
+          href: "/products",
+          items: [
+            { title: "CSOS Controlled Substance Ordering", href: "/csos" },
             {
-              title: "iPhone",
-              href: "/products/smartphones/iphone",
-              links: [
-                { title: "iPhone 15 Series", href: "/products/iphone-15" },
-                { title: "iPhone 14 Series", href: "/products/iphone-14" },
-              ],
+              title: "License Authorization Form",
+              href: "https://cdn.boundtree.com/assets/btm/pdfs/Bound_Tree_License_Authorization_Form.pdf?_gl=1*nq04dn*_gcl_au*MTMzMjI0NDQ2Ni4xNzYzNDcyMDM3",
             },
             {
-              title: "Android",
-              href: "/products/smartphones/android",
-              links: [
-                { title: "Samsung Galaxy", href: "/products/samsung-galaxy" },
-                { title: "Google Pixel", href: "/products/google-pixel" },
-              ],
+              title: "Paper 222 Class II Ordering",
+              href: "https://cdn.boundtree.com/assets/btm/pdfs/Bound_Tree_Controlled_Substances_Ordering_Guidelines.pdf?_gl=1*6tmlos*_gcl_au*MTMzMjI0NDQ2Ni4xNzYzNDcyMDM3",
+            },
+            {
+              title: "Navigating Pharmaceutical Ordering",
+              href: "/navigating-pharma",
             },
           ],
         },
         {
-          title: "Tablets & E-readers",
-          href: "/products/tablets",
+          title: "Resources",
+          href: "/products",
           items: [
             {
-              title: "iPad",
-              href: "/products/tablets/ipad",
-              links: [
-                { title: "iPad Pro", href: "/products/ipad-pro" },
-                { title: "iPad Air", href: "/products/ipad-air" },
-              ],
+              title: "Pharmaceutical Accreditations",
+              href: "/licensing-&-compliance",
             },
             {
-              title: "Android Tablets",
-              href: "/products/tablets/android",
-              links: [
-                { title: "Samsung Tab", href: "/products/samsung-tab" },
-                { title: "Kindle", href: "/products/kindle" },
-              ],
-            },
-          ],
-        },
-        {
-          title: "Accessories",
-          href: "/products/mobile-accessories",
-          items: [
-            {
-              title: "Cases & Protection",
-              href: "/products/accessories/cases",
-              links: [
-                { title: "Phone Cases", href: "/products/phone-cases" },
-                {
-                  title: "Screen Protectors",
-                  href: "/products/screen-protectors",
-                },
-              ],
+              title: "Pharmaceutical Backorder Report",
+              href: "https://cdn.boundtree.com/assets/btm/pdfs/Bound_Tree_Pharmaceutical_Back_Order_Report.pdf?_gl=1*10fas8y*_gcl_au*MTMzMjI0NDQ2Ni4xNzYzNDcyMDM3",
             },
             {
-              title: "Charging & Power",
-              href: "/products/accessories/charging",
-              links: [
-                {
-                  title: "Wireless Chargers",
-                  href: "/products/wireless-chargers",
-                },
-                { title: "Power Banks", href: "/products/power-banks" },
-              ],
+              title: "The Pharmaceutical Advantage",
+              href: "/pharmaceutical-advantage",
+            },
+            {
+              title: "UCapIt Controlled Medical Supply",
+              href: "/navigating-pharma",
             },
           ],
         },
@@ -172,40 +124,112 @@ export const navigationData: NavItem[] = [
     },
   },
   {
-    title: "Audio & Video",
+    title: "Curaplex",
     content: {
       columns: [
         {
-          title: "Headphones & Earbuds",
-          href: "/products/audio",
+          title: "Our Brand",
+          href: "/brands/curaplex",
           items: [
-            { title: "AirPods", href: "/products/airpods" },
-            { title: "Gaming Headsets", href: "/products/gaming-headsets" },
+            { title: "Curaplex for EMS by EMS", href: "/products" },
+            { title: "Curaplex Convenience Kitting", href: "/products" },
             {
-              title: "Over-Ear Headphones",
-              href: "/products/over-ear-headphones",
+              title: "OneScope&reg; Pro",
+              href: "/products",
             },
-            { title: "Wireless Earbuds", href: "/products/wireless-earbuds" },
-          ],
-        },
-        {
-          title: "Speakers & Sound",
-          href: "/products/speakers",
-          items: [
-            {
-              title: "Bluetooth Speakers",
-              href: "/products/bluetooth-speakers",
-            },
-            { title: "Smart Speakers", href: "/products/smart-speakers" },
-            { title: "Soundbars", href: "/products/soundbars" },
-            { title: "Home Theater", href: "/products/home-theater" },
+            { title: "Shop Curaplex Products", href: "/products" },
+            { title: "Shop Curaplex Kits", href: "/products" },
           ],
         },
       ],
     },
   },
   {
-    title: "Support",
-    href: "/support",
+    title: "Services, Solutions & Technology",
+    content: {
+      columns: [
+        {
+          title: "Capital Equipment",
+          href: "/products",
+          items: [
+            { title: "About Capital Equipment Services", href: "/products" },
+            { title: "Equipment Buy-Back or Trade-In", href: "/products" },
+            {
+              title: "Preventative Maintenance & Service",
+              href: "/products",
+            },
+            { title: "Shop New Equipment", href: "/products" },
+            { title: "Shop Recertified Equipment", href: "/products" },
+          ],
+        },
+        {
+          title: "Inventory Management",
+          href: "/products",
+          items: [
+            { title: "About Inventory Management", href: "/products" },
+            { title: "ESO Inventory Management", href: "/products" },
+            {
+              title: "Operative IQ Operations Management",
+              href: "/products",
+            },
+            { title: "Subscriptions", href: "/products" },
+            { title: "UCapIt Controlled Medical Supply", href: "/products" },
+          ],
+        },
+        {
+          title: "Billing & Reimbursement",
+          href: "/products",
+          items: [
+            {
+              title: "Medicare Data Collection Services",
+              href: "/products",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "What's New",
+    content: {
+      columns: [
+        {
+          title: "EMS Advocacy",
+          href: "/products",
+          items: [
+            { title: "EMS Advocacy Updates", href: "/products" },
+            { title: "Emergency Disaster Support", href: "/products" },
+          ],
+        },
+        {
+          title: "EMS Programs",
+          href: "/products",
+          items: [
+            { title: "Community Paramedicine", href: "/products" },
+            { title: "Subscriptions", href: "/products" },
+            { title: "Whole Blood Program", href: "/products" },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "EMS Training",
+    content: {
+      columns: [
+        {
+          title: "Training & Education",
+          href: "/product",
+          items: [
+            { title: "Bound Tree EDU", href: "/products" },
+            { title: "Scholarship Program", href: "/products" },
+            {
+              title: "Webinars",
+              href: "/products",
+            },
+          ],
+        },
+      ],
+    },
   },
 ];
