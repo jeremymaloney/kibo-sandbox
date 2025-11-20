@@ -1,4 +1,4 @@
-import BoundTreeHeader from "@/components/boundtree/header";
+import BoundTreeHeader from "@/components/boundtree/BoundTreeHeader";
 import React from "react";
 
 const BoundTreeHome = () => {

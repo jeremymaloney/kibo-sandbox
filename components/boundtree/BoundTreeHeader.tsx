@@ -1,8 +1,8 @@
 import React from "react";
-import CCBanner from "./cc-banner";
+import CCBanner from "./CCBanner";
 import Link from "next/link";
 import Image from "next/image";
-import MobileNavControls from "./mobile-nav-controls";
+import MobileNavControls from "./MobileNavControls";
 
 const BoundTreeHeader = () => {
   return (

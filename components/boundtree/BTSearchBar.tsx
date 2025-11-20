@@ -26,9 +26,20 @@ import {
 import { Loader2, Search, X as CloseIcon, Info } from "lucide-react";
 
 interface SearchResult {
-  value: string;
-  label: string;
-  group: string;
+  //   value: string;
+  //   label: string;
+  //   group: string;
+  productCode: string;
+  content: {
+    productName: string;
+  };
+  purchasableState: {
+    isPurchasable: boolean;
+  };
+  isActive: boolean;
+  inventoryInfo: {
+    onlineStockAvailable?: number;
+  };
 }
 
 export interface SearchBarProps {
@@ -54,60 +65,92 @@ function useDebounce<T>(value: T, delay: number): T {
 }
 
 // --- Mock API for Demo ---
-const mockSearchAPI = async (query: string): Promise<SearchResult[]> => {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 300));
+// const mockSearchAPI = async (query: string): Promise<SearchResult[]> => {
+//   // Simulate network delay
+//   await new Promise((resolve) => setTimeout(resolve, 300));
 
+//   if (!query) return [];
+//   const mockResults: SearchResult[] = [
+//     // Computers & Laptops
+//     { value: "macbook-pro-m3", label: "MacBook Pro M3", group: "Laptops" },
+//     {
+//       value: "gaming-laptop-asus",
+//       label: "ASUS Gaming Laptop",
+//       group: "Laptops",
+//     },
+//     { value: "dell-xps-13", label: "Dell XPS 13", group: "Laptops" },
+
+//     // Mobile & Accessories
+//     { value: "iphone-15-pro", label: "iPhone 15 Pro", group: "Smartphones" },
+//     {
+//       value: "samsung-galaxy-s24",
+//       label: "Samsung Galaxy S24",
+//       group: "Smartphones",
+//     },
+//     { value: "ipad-air", label: "iPad Air", group: "Tablets" },
+
+//     // Audio & Video
+//     { value: "airpods-pro", label: "AirPods Pro", group: "Audio" },
+//     { value: "sony-wh1000xm5", label: "Sony WH-1000XM5", group: "Audio" },
+//     { value: "bose-quietcomfort", label: "Bose QuietComfort", group: "Audio" },
+
+//     // Gaming
+//     { value: "ps5-console", label: "PlayStation 5", group: "Gaming" },
+//     { value: "xbox-series-x", label: "Xbox Series X", group: "Gaming" },
+//     {
+//       value: "nintendo-switch-oled",
+//       label: "Nintendo Switch OLED",
+//       group: "Gaming",
+//     },
+
+//     // Categories
+//     { value: "laptops", label: "All Laptops", group: "Categories" },
+//     { value: "smartphones", label: "All Smartphones", group: "Categories" },
+//     { value: "headphones", label: "All Headphones", group: "Categories" },
+//     { value: "gaming-consoles", label: "Gaming Consoles", group: "Categories" },
+//   ];
+
+//   return mockResults.filter(
+//     (item) =>
+//       item.label.toLowerCase().includes(query.toLowerCase()) ||
+//       item.group.toLowerCase().includes(query.toLowerCase())
+//   );
+// };
+
+// --- Kibo API ---
+const kiboSearchAPI = async (query: string): Promise<SearchResult[]> => {
+  debugger;
   if (!query) return [];
-  const mockResults: SearchResult[] = [
-    // Computers & Laptops
-    { value: "macbook-pro-m3", label: "MacBook Pro M3", group: "Laptops" },
-    {
-      value: "gaming-laptop-asus",
-      label: "ASUS Gaming Laptop",
-      group: "Laptops",
-    },
-    { value: "dell-xps-13", label: "Dell XPS 13", group: "Laptops" },
 
-    // Mobile & Accessories
-    { value: "iphone-15-pro", label: "iPhone 15 Pro", group: "Smartphones" },
-    {
-      value: "samsung-galaxy-s24",
-      label: "Samsung Galaxy S24",
-      group: "Smartphones",
-    },
-    { value: "ipad-air", label: "iPad Air", group: "Tablets" },
+  try {
+    const response = await fetch(`/api/search-products/?query=${query}`);
 
-    // Audio & Video
-    { value: "airpods-pro", label: "AirPods Pro", group: "Audio" },
-    { value: "sony-wh1000xm5", label: "Sony WH-1000XM5", group: "Audio" },
-    { value: "bose-quietcomfort", label: "Bose QuietComfort", group: "Audio" },
+    if (!response.ok) {
+      const errorData = await response
+        .json()
+        .catch(() => ({ error: "Error with Search API data" }));
+      console.error("Search API error:", errorData);
+      throw new Error(errorData.error || "Failed to search products");
+    }
 
-    // Gaming
-    { value: "ps5-console", label: "PlayStation 5", group: "Gaming" },
-    { value: "xbox-series-x", label: "Xbox Series X", group: "Gaming" },
-    {
-      value: "nintendo-switch-oled",
-      label: "Nintendo Switch OLED",
-      group: "Gaming",
-    },
+    const products = await response.json();
+    console.log("search bar products:", products);
 
-    // Categories
-    { value: "laptops", label: "All Laptops", group: "Categories" },
-    { value: "smartphones", label: "All Smartphones", group: "Categories" },
-    { value: "headphones", label: "All Headphones", group: "Categories" },
-    { value: "gaming-consoles", label: "Gaming Consoles", group: "Categories" },
-  ];
+    // Ensure we return an array
+    if (!Array.isArray(products)) {
+      console.error("Expected array but got:", typeof products, products);
+      return [];
+    }
 
-  return mockResults.filter(
-    (item) =>
-      item.label.toLowerCase().includes(query.toLowerCase()) ||
-      item.group.toLowerCase().includes(query.toLowerCase())
-  );
+    return products;
+  } catch (error) {
+    console.error("Error searching products:", error);
+    return [];
+  }
 };
 
 // Main SearchBar Component
-export default function SearchBar({
+export default function BTSearchBar({
   className,
   hintText = "Search for laptops, smartphones, headphones, and more...",
 }: SearchBarProps) {
@@ -130,7 +173,8 @@ export default function SearchBar({
       setIsLoading(true);
       setError(null);
       try {
-        const data = await mockSearchAPI(debouncedQuery);
+        // const data = await mockSearchAPI(debouncedQuery);
+        const data = await kiboSearchAPI(debouncedQuery);
         setResults(data);
       } catch {
         setError("Failed to search products. Please try again.");
@@ -195,7 +239,7 @@ export default function SearchBar({
               onKeyDown={handleKeyDown}
               placeholder="Search products or categories..."
               className="pr-10"
-              aria-label="Search for tech products"
+              aria-label="Search for products"
             />
             <div className="absolute top-1/2 right-2 -translate-y-1/2">
               {isLoading ? (
@@ -229,14 +273,14 @@ export default function SearchBar({
                   <CommandGroup>
                     {results.map((item) => (
                       <CommandItem
-                        key={item.value}
-                        value={item.value}
+                        key={item.productCode}
+                        value={item.productCode}
                         onSelect={handleSelect}
                         className="flex cursor-pointer items-center justify-between"
                       >
-                        <span>{item.label}</span>
+                        <span>{item.productCode}</span>
                         <span className="rounded bg-muted px-2 py-1 text-xs text-muted-foreground">
-                          {item.group}
+                          {item.content.productName}
                         </span>
                       </CommandItem>
                     ))}
