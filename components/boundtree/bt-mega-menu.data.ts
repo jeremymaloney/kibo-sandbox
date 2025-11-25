@@ -33,43 +33,43 @@ export interface NavItem {
 }
 
 export const navigationData: NavItem[] = [
-  {
-    title: "Products",
-    content: {
-      columns: [
-        {
-          items: [
-            { title: "On Sale", href: "/products" },
-            { title: "Airway & Oxygen Delivery", href: "/products" },
-            { title: "Apparel", href: "/products" },
-            { title: "Curaplex", href: "/products" },
-            { title: "Equipment Bags", href: "/products" },
-            { title: "First Aid, Trauma & Wound Care", href: "/products" },
-            { title: "IV & Drug Delivery", href: "/products" },
-            { title: "Immobilization & Splinting", href: "/products" },
-            { title: "Infection Control", href: "/products" },
-            { title: "Inventory Management & Reference", href: "/products" },
-            { title: "Kits", href: "/products" },
-            { title: "Monitoring & Diagnostics", href: "/products" },
-            { title: "Oxygen Equipment & Respiratory", href: "/products" },
-            { title: "Patient Handling", href: "/products" },
-            { title: "Pharmaceuticals", href: "/products" },
-            { title: "Suction", href: "/products" },
-            { title: "Tactical Medicine, MCI & Rescue", href: "/products" },
-            { title: "Training & Simulation", href: "/products" },
-          ],
-        },
-      ],
-    },
-  },
+  // {
+  //   title: "Products",
+  //   content: {
+  //     columns: [
+  //       {
+  //         items: [
+  //           { title: "On Sale", href: "/products" },
+  //           { title: "Airway & Oxygen Delivery", href: "/products" },
+  //           { title: "Apparel", href: "/products" },
+  //           { title: "Curaplex", href: "/products" },
+  //           { title: "Equipment Bags", href: "/products" },
+  //           { title: "First Aid, Trauma & Wound Care", href: "/products" },
+  //           { title: "IV & Drug Delivery", href: "/products" },
+  //           { title: "Immobilization & Splinting", href: "/products" },
+  //           { title: "Infection Control", href: "/products" },
+  //           { title: "Inventory Management & Reference", href: "/products" },
+  //           { title: "Kits", href: "/products" },
+  //           { title: "Monitoring & Diagnostics", href: "/products" },
+  //           { title: "Oxygen Equipment & Respiratory", href: "/products" },
+  //           { title: "Patient Handling", href: "/products" },
+  //           { title: "Pharmaceuticals", href: "/products" },
+  //           { title: "Suction", href: "/products" },
+  //           { title: "Tactical Medicine, MCI & Rescue", href: "/products" },
+  //           { title: "Training & Simulation", href: "/products" },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // },
   {
     title: "Pharmaceuticals",
     content: {
       columns: [
         {
           title: "Shop",
-          href: "/products",
-          items: [
+          href: "/boundtree/pharmaceuticals",
+          items: [ 
             { title: "Controlled Substances", href: "/class-iv-drugs/c/234" },
             { title: "Drugs Sold by Each", href: "/products" },
             { title: "IV Admin Sets", href: "/products" },

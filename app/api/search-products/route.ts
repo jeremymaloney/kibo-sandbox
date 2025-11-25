@@ -17,8 +17,6 @@ export async function GET(request: Request) {
       );
     }
 
-    // console.log("api query: ", query);
-
     // Get access token - use absolute URL for server-side fetch
     const baseUrl =
       //   process.env.NEXT_PUBLIC_BASE_URL ||
@@ -41,7 +39,6 @@ export async function GET(request: Request) {
 
     const tokenData = await tokenResponse.json();
     const accessToken: string = tokenData.accessToken;
-    // console.log("Access token received: ", accessToken);
 
     const queryRes = await fetch(
       `https://t${TENANT_ID}-s${SITE_ID}.sb.usc1.gcp.kibocommerce.com/api/commerce/catalog/storefront/productsearch/search?query=${query}`,
@@ -54,8 +51,6 @@ export async function GET(request: Request) {
         },
       }
     );
-
-    // console.log("queryRes: ", queryRes);
 
     if (!queryRes.ok) {
       const errorData = await queryRes.text();

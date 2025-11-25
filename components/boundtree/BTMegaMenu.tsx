@@ -32,6 +32,7 @@ import {
   LanguageSelector,
 } from "@/components/action-buttons";
 import { MenuColumn, CTABlock } from "@/components/menu-components";
+import BTSearchBar from "./BTSearchBar";
 
 export default function BTMegaMenu({
   navItems = navigationData,
@@ -98,11 +99,10 @@ export default function BTMegaMenu({
 
           {showSearchBar && (
             <div className="w-1/3flex w-lg px-4 lg:px-6">
-              <SearchBar
-                className="w-full max-w-xs transition-opacity duration-200 lg:max-w-sm"
-                hintText="Hint: Type 'Laptop' or 'Smartphone' for suggestions."
-                aria-label="Search products"
-              />
+              <BTSearchBar
+                  hintText="Hint: Start typing to search for products"
+                  aria-label="Search products"
+                />
             </div>
           )}
 

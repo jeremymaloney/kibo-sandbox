@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-// import { useRouter } from "next/navigation"; // Uncomment if you need routing
+import { useRouter } from "next/navigation"; // Uncomment if you need routing
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +25,14 @@ import {
 } from "@/components/ui/tooltip";
 import { Loader2, Search, X as CloseIcon, Info } from "lucide-react";
 
+interface CategoriesType {
+  categoryId: number;
+  content: {
+    name: string;
+    slug: string;
+  };
+}
+
 interface SearchResult {
   //   value: string;
   //   label: string;
@@ -40,6 +48,7 @@ interface SearchResult {
   inventoryInfo: {
     onlineStockAvailable?: number;
   };
+  categories: [CategoriesType];
 }
 
 export interface SearchBarProps {
@@ -151,7 +160,7 @@ const kiboSearchAPI = async (query: string): Promise<SearchResult[]> => {
 // Main SearchBar Component
 export default function BTSearchBar({
   className,
-  hintText = "Search for laptops, smartphones, headphones, and more...",
+  hintText = "Search for medical devices, controlled substances, and more...",
 }: SearchBarProps) {
   // const router = useRouter(); // Uncomment if you need routing
   const [isOpen, setIsOpen] = React.useState(false);
@@ -161,6 +170,8 @@ export default function BTSearchBar({
   const [error, setError] = React.useState<string | null>(null);
 
   const debouncedQuery = useDebounce(query, 300);
+
+  const router = useRouter();
 
   React.useEffect(() => {
     if (!debouncedQuery) {
@@ -185,10 +196,11 @@ export default function BTSearchBar({
     fetchData();
   }, [debouncedQuery]);
 
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: string, category: string) => {
     // TODO: Implement your navigation logic here
     // Example: router.push(`/products/${value}`);
-    console.log(`Navigate to product: ${value}`);
+    console.log(`Navigate to product: /${category}/${value}`);
+    router.push(`/boundtree/${category}/${value}`);
     setIsOpen(false);
     setQuery("");
   };
@@ -274,12 +286,17 @@ export default function BTSearchBar({
                       <CommandItem
                         key={item.productCode}
                         value={item.productCode}
-                        onSelect={handleSelect}
+                        onSelect={() =>
+                          handleSelect(
+                            item.productCode,
+                            item.categories[0].content.slug
+                          )
+                        }
                         className="flex cursor-pointer items-center justify-between"
                       >
-                        <span>{item.productCode}</span>
+                        <span>{item.content.productName}</span>
                         <span className="rounded bg-muted px-2 py-1 text-xs text-muted-foreground">
-                          {item.content.productName}
+                          {item.productCode}
                         </span>
                       </CommandItem>
                     ))}
