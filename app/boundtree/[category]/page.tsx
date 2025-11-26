@@ -4,7 +4,7 @@ const TENANT_ID = process.env.KIBO_TENANT_ID;
 const SITE_ID = process.env.KIBO_SITE_ID;
 
 interface CategoryPageProps {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }
 
 interface CategoryResultType {
@@ -57,7 +57,7 @@ const getCatId = async (category: string): Promise<number> => {
 
     while (hasMore) {
       const catsResponse = await fetch(
-        `https://t${TENANT_ID}-s${SITE_ID}.sb.usc1.gcp.kibocommerce.com/api/commerce/catalog/storefront/categories?startIndex${startIndex}=&pageSize=${pageSize}`,
+        `https://t${TENANT_ID}-s${SITE_ID}.sb.usc1.gcp.kibocommerce.com/api/commerce/catalog/storefront/categories?startIndex=${startIndex}&pageSize=${pageSize}`,
         {
           method: "GET",
           headers: {
@@ -74,41 +74,96 @@ const getCatId = async (category: string): Promise<number> => {
       }
 
       const catsData = await catsResponse.json();
+      // console.log(`catsData page ${page}: `, catsData);
       allCategories = allCategories.concat(catsData.items);
       hasMore = catsData.pageCount > page;
       startIndex += pageSize;
       page++;
     }
 
+    console.log(`Looking for category with slug: "${category}"`);
+    console.log(`Total categories fetched: ${allCategories.length}`);
+
     const selectedCat = allCategories.find(
       (cat) => cat.content.slug === category
     );
 
-    return selectedCat?.categoryId || 1;
+    if (!selectedCat) {
+      console.error(`Category not found with slug: "${category}"`);
+      console.log('Available category slugs:', allCategories.map(cat => cat.content.slug));
+      throw new Error(`Category not found: ${category}`);
+    }
+
+    console.log(`Found category ID: ${selectedCat.categoryId} for slug: "${category}"`);
+    return selectedCat.categoryId;
   } catch (error) {
     console.log("Error getting category ID: ", error);
     return 1;
   }
 };
 
-// TODO:  FINISH THIS FUNCTION
-const getProducts = async (catId: number): Promise<ProductType | undefined> => {
+const getProducts = async (catId: number): Promise<ProductType[] | undefined> => {
   try {
-    const products = await fetch(`/api/category/products/${catId}`);
+    console.log(`Fetching products for category ID: ${catId}`);
+    const baseUrl = `http://localhost:${3000}`;
+    const response = await fetch(`${baseUrl}/api/category/products/${catId}`);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Failed to fetch products: ${response.status} - ${errorText}`);
+      return undefined;
+    }
+
+    const productsData = await response.json();
+    console.log("productsData received: ", productsData);
+
+    // The API returns an object with items array
+    if (productsData.items && Array.isArray(productsData.items)) {
+      return productsData.items;
+    }
+
+    return productsData;
   } catch (error) {
-    console.log("Error getting category ID: ", error);
+    console.error("Error getting products from category ID: ", error);
     return undefined;
   }
 };
 
+const capitalizeFirstLetter = (string: string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 const CategoryPage = async ({ params }: CategoryPageProps) => {
-  const {category} = params;
-  // const catId = await getCatId(category);
-  // const products = await getProducts(catId);
+  const {category} = await params;
+
+  console.log(`CategoryPage rendering for category: "${category}"`);
+
+  const catId = await getCatId(category);
+  console.log(`Retrieved category ID: ${catId}`);
+
+  const products = await getProducts(catId);
+
+  if(!products || products.length === 0) {
+    return (
+      <div>
+        <h1>{capitalizeFirstLetter(category)} Category Page</h1>
+        <p>No products found for this category.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <h1>{category} Category Page</h1>
+      <h1>{capitalizeFirstLetter(category)} Category Page</h1>
+      <p>Found {products.length} product(s)</p>
+      <div>
+        {products.map((product) => (
+          <div key={product.productCode}>
+            <h2>{product.content.productName}</h2>
+            <p>{product.content.productFullDescription}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

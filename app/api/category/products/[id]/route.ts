@@ -6,14 +6,16 @@ import { NextResponse } from "next/server";
 const TENANT_ID = process.env.KIBO_TENANT_ID;
 const SITE_ID = process.env.KIBO_SITE_ID;
 
-export async function GET(request: Request) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
+    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
-        { error: "Category is required" },
+        { error: "Category ID is required" },
         { status: 400 }
       );
     }
@@ -57,7 +59,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const data = catProdsResponse.json();
+    const data = await catProdsResponse.json();
     console.log("get product by cat ID data: ", data);
 
     return NextResponse.json(data, { status: 200 });

@@ -78,6 +78,7 @@ export default function ProductDetailContent({ product }: ProductDetailContentPr
 
     // Handle add to cart
     const handleAddToCart = () => {
+        // TODO: Implement add to cart functionality
         console.log(`Adding ${quantity} of ${product.productCode} to cart`);
         alert(`Added ${quantity} item(s) to cart!`);
     };
