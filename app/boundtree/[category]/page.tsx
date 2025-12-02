@@ -1,5 +1,5 @@
 import React from "react";
-import ProductGrid from "@/components/product-grid";
+import ProductGrid from "@/components/boundtree/product-grid";
 
 const TENANT_ID = process.env.KIBO_TENANT_ID;
 const SITE_ID = process.env.KIBO_SITE_ID;
