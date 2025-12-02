@@ -70,6 +70,7 @@ export const navigationData: NavItem[] = [
           title: "Shop",
           href: "/boundtree/pharmaceuticals",
           items: [ 
+            { title: "AEDs", href: "/boundtree/aeds" },
             { title: "Controlled Substances", href: "/class-iv-drugs/c/234" },
             { title: "Drugs Sold by Each", href: "/products" },
             { title: "IV Admin Sets", href: "/products" },
