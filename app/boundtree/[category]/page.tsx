@@ -1,4 +1,5 @@
 import React from "react";
+import ProductGrid from "@/components/product-grid";
 
 const TENANT_ID = process.env.KIBO_TENANT_ID;
 const SITE_ID = process.env.KIBO_SITE_ID;
@@ -20,16 +21,31 @@ interface ProductImgType {
   imageUrl: string;
 }
 
+interface CategoriesType {
+  categoryId: number;
+  content: {
+    name: string;
+    slug: string;
+  };
+}
+
 interface ProductType {
   productCode: string;
   content: {
     productName: string;
     productFullDescription?: string;
-    productImages?: [ProductImgType];
+    productShortDescription?: string;
+    productImages?: ProductImgType[];
   };
   price: {
     price: number;
+    salePrice?: number;
+    catalogListPrice?: number;
   };
+  purchasableState?: {
+    isPurchasable?: boolean;
+  };
+  categories?: CategoriesType[];
 }
 
 const getCatId = async (category: string): Promise<number> => {
@@ -145,25 +161,19 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
 
   if(!products || products.length === 0) {
     return (
-      <div>
-        <h1>{capitalizeFirstLetter(category)} Category Page</h1>
-        <p>No products found for this category.</p>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">{capitalizeFirstLetter(category)} Category Page</h1>
+        <p className="text-muted-foreground">No products found for this category.</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>{capitalizeFirstLetter(category)} Category Page</h1>
-      <p>Found {products.length} product(s)</p>
-      <div>
-        {products.map((product) => (
-          <div key={product.productCode}>
-            <h2>{product.content.productName}</h2>
-            <p>{product.content.productFullDescription}</p>
-          </div>
-        ))}
-      </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-2">{capitalizeFirstLetter(category)} Category Page</h1>
+      <p className="text-muted-foreground mb-8">Found {products.length} product(s)</p>
+
+      <ProductGrid products={products} categorySlug={category} />
     </div>
   );
 };
