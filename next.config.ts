@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.boundtree.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn-sb.mozu.com",
+      },
     ],
   },
 };
